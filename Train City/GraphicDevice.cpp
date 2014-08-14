@@ -57,10 +57,7 @@ void GraphicDevice::initPointerObject()
 		throw GameError("Unable to initialize TTF: ", TTF_GetError());
 	}
 	font = TTF_OpenFont( (resourcesPath+fontName).c_str() ,128);//error
-	if(font)
-	{
-		TTF_SetFontStyle(font,TTF_STYLE_BOLD);		
-	}else
+	if(!font)
 	{
 		deletePointerObject();
 		throw GameError("Could not open font :"+resourcesPath+fontName);
@@ -81,6 +78,7 @@ GraphicDevice::~GraphicDevice(void)
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	TTF_CloseFont(font);
+	TTF_Quit();
 }
 
 void GraphicDevice::deletePointerObject()

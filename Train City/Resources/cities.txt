@@ -1,0 +1,7 @@
+Rijeka city.png 450 700 40 40
+East_Smelter city.png 250 450 40 40
+Trading_Post city.png 250 50 40 40
+Minas_Tirith  city.png 440 270 40 40
+Old_Harbor city.png 620 690 40 40
+Cat_Haven city.png 900 400 40 40
+Ghost_Town city.png 800 200 40 40

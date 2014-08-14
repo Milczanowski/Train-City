@@ -4,5 +4,13 @@
 
 #include "stdafx.h"
 
+const std::string intToString(const int value)
+{
+	std::ostringstream text;
+	text << value;
+	return text.str();
+
+}
+
 // TODO: reference any additional headers you need in STDAFX.H
 // and not in this file

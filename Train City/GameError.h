@@ -6,7 +6,7 @@
 class GameError
 {
 private:
-	std::string communique, sdl_error;
+	std::string information, sdl_error;
 public:
 	GameError(const std::string);
 	GameError(const std::string, const std::string);

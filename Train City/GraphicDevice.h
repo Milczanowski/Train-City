@@ -117,7 +117,7 @@ inline void GraphicDevice::drawText(const std::string text,const SDL_Color textC
 	if(getInstance().font)
 	{
 		SDL_Surface *textSurface;
-		if(textSurface = TTF_RenderText_Solid(getInstance().font,text.c_str(),textColor))
+		if (textSurface = TTF_RenderText_Solid(getInstance().font, text.c_str(), textColor))
 		{
 			SDL_Texture *textTexture = SDL_CreateTextureFromSurface(getRenderer() ,textSurface);
 			Vector2 surfaceSize(textSurface->w * size/textSurface->h , size);

@@ -1,20 +1,40 @@
-﻿Build started 2014-08-07 18:56:02.
+﻿Build started 2014-08-13 13:20:39.
      1>Project "C:\Users\Michal\Documents\GitHub\Train-City\Train City\Train City.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GraphicDevice.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt City.cpp CityInfo.cpp GameError.cpp GameObject.cpp GraphicDevice.cpp Map.cpp Mouse.cpp Product.cpp Textures.cpp Time.cpp Vector2.cpp main.cpp
+         main.cpp
+         Vector2.cpp
+         Time.cpp
+         Textures.cpp
+     1>Textures.cpp(110): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
+         Product.cpp
+         Mouse.cpp
+         Map.cpp
          GraphicDevice.cpp
+         GameObject.cpp
+         GameError.cpp
+         CityInfo.cpp
+         City.cpp
+         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.exe" /NOLOGO SDL2.lib SDL2main.lib SDL2test.lib SDL2_ttf.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.lib" /MACHINE:X86 Debug\GameError.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.exe" /NOLOGO SDL2.lib SDL2main.lib SDL2test.lib SDL2_ttf.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.lib" /MACHINE:X86 Debug\City.obj
+         Debug\CityInfo.obj
+         Debug\GameError.obj
          Debug\GameObject.obj
          Debug\GraphicDevice.obj
          Debug\main.obj
+         Debug\Map.obj
          Debug\Mouse.obj
+         Debug\Product.obj
          Debug\stdafx.obj
          Debug\Textures.obj
+         Debug\Time.obj
          Debug\Vector2.obj
          Train City.vcxproj -> C:\Users\Michal\Documents\GitHub\Train-City\Debug\Train City.exe
      1>Done Building Project "C:\Users\Michal\Documents\GitHub\Train-City\Train City\Train City.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.75
+Time Elapsed 00:00:04.15

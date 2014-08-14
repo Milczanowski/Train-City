@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <iostream>
+#include <sstream>
 
 #define DEFAULT_POS_X 100
 #define DEFAULT_POS_Y 100
@@ -22,5 +23,8 @@ static const std::string resourcesPath = "Resources/";
 static const std::string texturesPath = "images/";
 static const std::string fontName = "arial.ttf";
 static const std::string iconFile = "icon.png";
+
+
+const std::string intToString(const int value);
 
 // TODO: reference additional headers your program requires here
