@@ -31,6 +31,7 @@ public:
 
 	const std::string getName()const;
 	void update();
+	void draw();
 
 	void onMouseOver();
 	void onMouseClickLeft();

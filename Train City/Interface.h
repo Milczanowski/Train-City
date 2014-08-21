@@ -60,6 +60,11 @@ inline const MapElement * Interface::getTarget()const
 	return target;
 }
 
+inline void Interface::setTarget2(MapElement * target2)
+{
+	this->target2 = target2;
+}
+
 
 
 

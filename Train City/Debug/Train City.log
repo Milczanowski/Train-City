@@ -1,4 +1,4 @@
-﻿Build started 2014-08-21 18:57:00.
+﻿Build started 2014-08-21 19:43:17.
      1>Project "C:\Users\Michal\Documents\GitHub\Train-City\Train City\Train City.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt City.cpp CityInfo.cpp Delay.cpp GameError.cpp GameObject.cpp GraphicDevice.cpp Interface.cpp Map.cpp MapElement.cpp Mouse.cpp Player.cpp Product.cpp ProductsManager.cpp Textures.cpp Time.cpp Vector2.cpp main.cpp stdafx.cpp
@@ -50,4 +50,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:24.84
+Time Elapsed 00:00:23.83

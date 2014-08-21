@@ -2,7 +2,7 @@
 #include "Interface.h"
 
 
-Interface::Interface(const GameObject & gameObject, Map *map) :GameObject(gameObject), map(map)
+Interface::Interface(const GameObject & gameObject, Map *map) :GameObject(gameObject), map(map), target(NULL), target2(NULL)
 {
 }
 
@@ -25,6 +25,12 @@ void Interface::update()
 
 	for (ButtonList::iterator iter = buttonList.begin(); iter != buttonList.end(); iter++)
 		iter->update();
+
+	if (target != NULL && target2 != NULL)
+	{
+		target->setConnected(target2);
+		target2->setConnected(target);
+	}
 }
 
 void Interface::connectMapElement()
@@ -51,6 +57,10 @@ void Interface::refresh()
 	if (target != NULL)
 	{
 		buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("errorTexture")), "Connect", &Interface::connectMapElement, this));
+	}
+	else
+	{
+		MapElement::setConnect(false);
 	}
 }
 

@@ -2,7 +2,7 @@
 #include "MapElement.h"
 
 
-MapElement::MapElement(const GameObject& gameObject, const std::string name, const std::string connectionsListFile) :GameObject(gameObject), name(name), info(NULL), markTexture(Textures::getTexture(markTextureName))
+MapElement::MapElement(const GameObject& gameObject, const std::string name, const std::string connectionsListFile) :GameObject(gameObject), name(name), info(NULL), markTexture(NULL)
 {
 	std::ifstream fileConnectionList(connectionsListFile);
 	if (fileConnectionList.is_open())
@@ -38,14 +38,17 @@ void MapElement::onMouseOver()
 
 void MapElement::onMouseClickLeft()
 {
-	if (_interface != NULL)
-		_interface->setTarget(this);
+	if (markTexture != NULL)
+		_interface->setTarget2(this);
 }
 
 void MapElement::setConnected(MapElement *mapElement)
 {
-	connections.push_back(mapElement);
-	permittedConnections.remove(mapElement->name);
+	if (mapElement != NULL)
+	{		
+		connections.push_back(mapElement);
+		permittedConnections.remove(mapElement->name);
+	}
 }
 
 
@@ -54,11 +57,23 @@ void MapElement::update()
 	GameObject::update();
 	if (connect)
 	{		
-		if ((std::find(permittedConnections.begin(), permittedConnections.end(), _interface->getTarget()->getName())) !=  permittedConnections.end())
+		if ( markTexture==NULL && (std::find(permittedConnections.begin(), permittedConnections.end(), _interface->getTarget()->getName())) !=  permittedConnections.end())
 		{
-			angle += 0.1f;
+			markTexture = Textures::getTexture(markTextureName);
 		}
 	}
+	else
+	{
+		if (markTexture != NULL)//co lepiej? co pêtlê nadpisywaæ czy sprawdaæ i raz napisaæ 
+			markTexture = NULL;
+	}
+}
+
+void MapElement::draw()
+{
+	if (markTexture != NULL)
+		GraphicDevice::drawTexture(markTexture, position - Vector2(10, 10), size + Vector2(20, 20));
+	GameObject::draw();
 }
 
 Interface * MapElement::_interface = NULL;
