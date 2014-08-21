@@ -2,14 +2,18 @@
 #include "City.h"
 #include <list>
 #include <fstream>
+#include "MapElement.h"
 
 class City;
+class MapElement;
+
+typedef std::list<MapElement*> MapElements;
+
 
 class Map : public GameObject
-{
-	typedef std::list<City> Cities;
+{	
 private:
-	Cities cities;
+	MapElements mapElements;
 public:
 	Map(const GameObject &, std::string );
 	~Map();
@@ -17,5 +21,6 @@ public:
 	void draw();
 	void update();
 	void onMouseClickLeft();
+	MapElement * findCity(const std::string)const;
 };
 

@@ -20,7 +20,6 @@ public:
 };
 
 
-
 class CityInfo :public BasicInfo
 {
 	Products * products;

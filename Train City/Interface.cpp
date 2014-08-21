@@ -36,17 +36,22 @@ void Interface::connectMapElement()
 void Interface::setTarget(MapElement *target)
 {
 	this->target = target;
+	refresh();
+}
+
+void Interface::setTarget(const std::string name)
+{
+	target = map->findCity(name);
+	refresh();
+}
+
+void Interface::refresh()
+{
 	buttonList.clear();
 	if (target != NULL)
 	{
 		buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("errorTexture")), "Connect", &Interface::connectMapElement, this));
 	}
-
-}
-
-void Interface::setTarget(const std::string name)
-{
-
 }
 
 

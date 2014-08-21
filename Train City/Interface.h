@@ -2,10 +2,11 @@
 #include "GameObject.h"
 #include "Map.h"
 #include "Button.h"
+#include <functional>
+#include <algorithm>
 
 class MapElement;
 class Map;
-
 class Interface;
 
 typedef void(*Function)(void);
@@ -27,12 +28,16 @@ public:
 	virtual ~Button();
 	void draw();
 	void onMouseClickLeft();
+	
 };
+
+typedef std::list<Button> ButtonList;
 
 class Interface : public GameObject
 {
+private:
+	void refresh();
 
-	typedef std::list<Button> ButtonList;
 protected:
 	Map * map;
 	MapElement * target , *target2;
@@ -47,8 +52,13 @@ public:
 	void update();
 	void draw();
 
-	
+	const MapElement * getTarget()const;
 };
+
+inline const MapElement * Interface::getTarget()const
+{
+	return target;
+}
 
 
 

@@ -26,7 +26,7 @@ City::~City()
 
 void City::onMouseOver()
 {
-	if (info == NULL)
+	if (info == NULL && !connect)
 	{
 		Vector2 cityInfoPos = getCenterPosition() - (cityInfoSize / 2);
 		if (cityInfoPos.get_X() < 200)cityInfoPos.set_X(200);
@@ -40,14 +40,14 @@ void City::onMouseOver()
 
 void City::draw()
 {
-	GameObject::draw();
+	MapElement::draw();
 	if (info != NULL)
 		info->draw();
 }
 
 void City::update()
 {
-	GameObject::update();
+	MapElement::update();
 	if (info != NULL)
 	{
 		info->update();
@@ -60,3 +60,5 @@ void City::update()
 
 	productsManager.update(&products);
 }
+
+

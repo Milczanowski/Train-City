@@ -2,7 +2,7 @@
 #include "MapElement.h"
 
 
-MapElement::MapElement(const GameObject& gameObject, const std::string name, const std::string connectionsListFile) :GameObject(gameObject), name(name), info(NULL)
+MapElement::MapElement(const GameObject& gameObject, const std::string name, const std::string connectionsListFile) :GameObject(gameObject), name(name), info(NULL), markTexture(Textures::getTexture(markTextureName))
 {
 	std::ifstream fileConnectionList(connectionsListFile);
 	if (fileConnectionList.is_open())
@@ -24,7 +24,7 @@ MapElement::~MapElement()
 
 void MapElement::onMouseOver()
 {
-	if (info == NULL)
+	if (info == NULL &&!connect)
 	{
 		Vector2 basicInfoSize = getCenterPosition() - (cityInfoSize / 2);
 		if (basicInfoSize.get_X() < 200)basicInfoSize.set_X(200);
@@ -46,6 +46,19 @@ void MapElement::setConnected(MapElement *mapElement)
 {
 	connections.push_back(mapElement);
 	permittedConnections.remove(mapElement->name);
+}
+
+
+void MapElement::update()
+{
+	GameObject::update();
+	if (connect)
+	{		
+		if ((std::find(permittedConnections.begin(), permittedConnections.end(), _interface->getTarget()->getName())) !=  permittedConnections.end())
+		{
+			angle += 0.1f;
+		}
+	}
 }
 
 Interface * MapElement::_interface = NULL;

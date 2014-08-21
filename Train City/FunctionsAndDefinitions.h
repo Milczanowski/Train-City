@@ -22,6 +22,7 @@ static const std::string resourcesPath = "Resources/";
 static const std::string texturesPath = "images/";
 static const std::string fontName = "arial.ttf";
 static const std::string iconFile = "icon.png";
+static const std::string markTextureName = "markTexture.png";
 
 const Vector2 cityInfoSize(300, 150);
 const Vector2 basicInfoSize(100, 20);
@@ -43,5 +44,7 @@ inline const std::string ToString<float>(const float value)
 	sprintf_s(buffer, 32, "%0.2f", value);
 	return buffer;
 }
+
+
 
 

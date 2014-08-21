@@ -16,6 +16,7 @@ class MapElement : public GameObject
 	typedef std::list<MapElement *> ConnectionsList;
 
 protected:
+	SDL_Texture* markTexture;
 	std::string name;
 	BasicInfo * info;
 	StringList permittedConnections;
@@ -28,15 +29,24 @@ public:
 	MapElement(const GameObject& , const std::string, const std::string);
 	virtual ~MapElement();
 
+	const std::string getName()const;
+	void update();
+
 	void onMouseOver();
 	void onMouseClickLeft();
 	void setConnected(MapElement *);
 	static void setConnect(const bool);
 };
 
+
 inline void MapElement::setConnect(const bool value)
 {
 	MapElement::connect = value;
+}
+
+inline const std::string MapElement::getName()const
+{
+	return name;
 }
 
 

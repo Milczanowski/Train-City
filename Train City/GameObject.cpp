@@ -20,7 +20,7 @@ GameObject::~GameObject(void)
 //Functions
 void GameObject::draw()
 {
-	GraphicDevice::drawTexture(texture, position, size); 
+	GraphicDevice::drawTexture(texture, position, size,angle); 
 }
 
 void GameObject::update()

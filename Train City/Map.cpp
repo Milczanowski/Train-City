@@ -15,7 +15,7 @@ Map::Map(const GameObject & gameObject, std::string fileName) :GameObject(gameOb
 			cityFile >> pos >> size >> textureName >> cityName >> connectionsListFile >> productsFileName;
 			try
 			{
-				cities.push_back(City(MapElement(GameObject(pos, size, 0, Textures::getTexture(textureName)), cityName, connectionsListFile), productsFileName));
+				mapElements.push_back(new City(MapElement(GameObject(pos, size, 0, Textures::getTexture(textureName)), cityName, connectionsListFile), productsFileName));
 			}
 			catch (GameError & gameError)
 			{
@@ -35,9 +35,9 @@ Map::~Map()
 void Map::draw()
 {
 	GameObject::draw();
-	for (Cities::iterator iter = cities.begin(); iter != cities.end(); iter++)
+	for (MapElements::iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
 	{
-		iter->draw();
+		(*iter)->draw();
 	}
 }
 
@@ -45,9 +45,9 @@ void Map::draw()
 void Map::update()
 {	
 	GameObject::update();
-	for (Cities::iterator iter = cities.begin(); iter != cities.end(); iter++)
+	for (MapElements::iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
 	{
-		iter->update();
+		(*iter)->update();
 	}
 }
 
@@ -55,4 +55,14 @@ void Map::onMouseClickLeft()
 {
 	if (MapElement::_interface != NULL)
 		MapElement::_interface->setTarget(NULL);
+}
+
+MapElement * Map::findCity(const std::string name)const
+{
+	for (MapElements::const_iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
+	{
+		if ((*iter)->getName() == name)
+			 return (*iter);
+	}
+	return NULL;
 }
