@@ -22,7 +22,7 @@ public:
 
 inline void Time::draw(const SDL_Color color, const Vector2 & position, const float size)const
 {
-	GraphicDevice::drawText(intToString(hour)+" : "+ intToString(minute)+" : "+intToString(second), color, position, size);
+	GraphicDevice::drawText(ToString<int>(hour) + " : " + ToString<int>(minute) + " : " + ToString<int>(second), color, position, size);
 }
 
 inline const float Time::getDetlaTime()
@@ -40,7 +40,7 @@ inline void Time::update()
 	if (millisecond >= 1000)
 	{
 		millisecond -= 1000;
-		if (addTime(&second, 60))
+		if (addTime(&second, 59))
 			if (addTime(&minute, 60))
 				addTime(&hour, 24); 
 	}

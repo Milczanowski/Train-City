@@ -1,7 +1,7 @@
-Rijeka city.png 450 700 40 40
-East_Smelter city.png 250 450 40 40
-Trading_Post city.png 250 50 40 40
-Minas_Tirith  city.png 440 270 40 40
-Old_Harbor city.png 620 690 40 40
-Cat_Haven city.png 900 400 40 40
-Ghost_Town city.png 800 200 40 40
+450 700 40 40 city.png Rijeka Resources/rijekaC.txt Resources/products.txt 
+250 450 40 40 city.png East_Smelter Resources/east_smelterC.txt Resources/products.txt 
+250 50 40 40 city.png Trading_Post Resources/trading_postC.txt Resources/products.txt 
+440 270 40 40 city.png Minas_Tirith Resources/minas_tirithC.txt Resources/products.txt 
+620 690 40 40 city.png Old_Harbor Resources/old_harborC.txt Resources/products.txt 
+900 400 40 40 city.png Cat_Haven Resources/cat_havenC.txt Resources/products.txt 
+800 200 40 40 city.png Ghost_Town Resources/ghost_townC.txt Resources/products.txt 

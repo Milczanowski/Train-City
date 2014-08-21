@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "stdafx.h" 
 #include "Vector2.h"
 
 //Constructors and destructors

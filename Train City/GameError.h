@@ -1,4 +1,5 @@
 #pragma once
+#include "FunctionsAndDefinitions.h"
 #include <iostream>
 #include <fstream>
 #include <string>

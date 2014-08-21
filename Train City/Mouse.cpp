@@ -1,7 +1,5 @@
-#include "StdAfx.h"
+#include "stdafx.h" 
 #include "Mouse.h"
-#include <SDL.h>
-
 
 Mouse::Mouse(void)
 {

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "stdafx.h" 
 #include "Product.h"
 
 
@@ -18,5 +18,14 @@ void Product::update()
 	count -= demandPerSecond;
 	if (count < 0)count = 0;
 
-	price += (productionPerSecond < demandPerSecond) ? 0.05f * price : -0.05f * price;
+	if (productionPerSecond < demandPerSecond)
+		price += 0.01f * price;
+	else if (productionPerSecond > demandPerSecond)
+		price -= 0.01f * price;
+}
+
+void Product::upgrade()
+{
+	productionPerSecond *= 1 + (((float)((rand() % 50) - 25)) / 100);
+	demandPerSecond		*= 1 + (((float)((rand() % 50) - 25)) / 100);	
 }

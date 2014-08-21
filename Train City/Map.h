@@ -1,9 +1,9 @@
 #pragma once
-#include "GameObject.h"
-#include "Textures.h"
 #include "City.h"
 #include <list>
 #include <fstream>
+
+class City;
 
 class Map : public GameObject
 {
@@ -11,10 +11,11 @@ class Map : public GameObject
 private:
 	Cities cities;
 public:
-	Map(const GameObject &, std::string);
+	Map(const GameObject &, std::string );
 	~Map();
 
 	void draw();
 	void update();
+	void onMouseClickLeft();
 };
 

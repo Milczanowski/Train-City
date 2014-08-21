@@ -1,10 +1,80 @@
 Texture not found: 
+: file not found(MapElements)
 Texture not found: 
+: file not found(MapElements)
 Texture not found: 
-Text render error: Text has zero width
+: file not found(MapElements)
 Texture not found: 
+: file not found(MapElements)
 Texture not found: 
+: file not found(MapElements)
 Texture not found: 
+: file not found(MapElements)
 Texture not found: 
+: file not found(MapElements)
+Texture not found: info.png
 Texture not found: 
+: file not found(MapElements)
+Texture not found: info.png
 Texture not found: 
+: file not found(MapElements)
+Texture not found: 
+: file not found(MapElements)
+Texture not found: 
+: file not found(MapElements)
+Texture not found: 
+: file not found(MapElements)
+Texture not found: 
+: file not found(MapElements)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: 
+: file not found(MapElement)
+Texture not found: errorTexture
+Texture not found: 
+: file not found(MapElement)

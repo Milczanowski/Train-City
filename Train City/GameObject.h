@@ -55,6 +55,11 @@ inline const Vector2 GameObject::getPosition()const
 	return this->position;
 }
 
+inline const Vector2 GameObject::getCenterPosition()const
+{
+	return this->position +(size/2);
+}
+
 inline const Vector2 GameObject::getSize()const
 {
 	return this->size;
