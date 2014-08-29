@@ -39,6 +39,11 @@ void Map::draw()
 	{
 		(*iter)->draw();
 	}
+
+	for(RailroadTracksList::const_iterator iter = railroadTrackList.begin(); iter != railroadTrackList.end(); iter++)
+	{
+		iter->draw();
+	}
 }
 
 
@@ -55,6 +60,11 @@ void Map::onMouseClickLeft()
 {
 	if (MapElement::_interface != NULL)
 		MapElement::_interface->setTarget(NULL);
+}
+
+void Map::onMouseClickRight()
+{
+	MapElement::setConnect(false);
 }
 
 MapElement * Map::findCity(const std::string name)const

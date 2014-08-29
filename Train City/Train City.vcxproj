@@ -97,12 +97,15 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapElement.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="PassengerTrain.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="ProductsManager.h" />
+    <ClInclude Include="RailroadTracks.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Train.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -119,15 +122,18 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapElement.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="PassengerTrain.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="ProductsManager.cpp" />
+    <ClCompile Include="RailroadTracks.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Train.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>

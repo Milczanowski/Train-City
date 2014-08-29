@@ -37,12 +37,16 @@ public:
 	void onMouseClickLeft();
 	void setConnected(MapElement *);
 	static void setConnect(const bool);
+	static const bool getConnect(); 
 };
-
+inline const bool MapElement::getConnect()
+{
+	return connect;
+}
 
 inline void MapElement::setConnect(const bool value)
 {
-	MapElement::connect = value;
+	MapElement::connect = value;;
 }
 
 inline const std::string MapElement::getName()const

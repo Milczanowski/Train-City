@@ -48,6 +48,8 @@ void MapElement::setConnected(MapElement *mapElement)
 	{		
 		connections.push_back(mapElement);
 		permittedConnections.remove(mapElement->name);
+
+		connect=false;
 	}
 }
 
