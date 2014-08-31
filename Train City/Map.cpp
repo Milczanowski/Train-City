@@ -58,13 +58,15 @@ void Map::update()
 
 void Map::onMouseClickLeft()
 {
-	if (MapElement::_interface != NULL)
-		MapElement::_interface->setTarget(NULL);
+
 }
 
 void Map::onMouseClickRight()
 {
-	MapElement::setConnect(false);
+	MapElement::setState(notSelect);
+
+	if (MapElement::_interface != NULL)
+		MapElement::_interface->setTarget(NULL);
 }
 
 MapElement * Map::findCity(const std::string name)const

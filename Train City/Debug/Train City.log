@@ -1,4 +1,4 @@
-﻿Build started 2014-08-29 03:18:25.
+﻿Build started 2014-08-31 05:12:31.
      1>Project "C:\Users\Basia\Documents\Train-City\Train City\Train City.vcxproj" on node 2 (build target(s)).
        Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>InitializeBuildStatus:
@@ -20,9 +20,6 @@
          MapElement.cpp
          Map.cpp
          Interface.cpp
-     1>Interface.cpp(129): warning C4018: '>=' : signed/unsigned mismatch
-     1>Interface.cpp(131): warning C4244: 'argument' : conversion from 'unsigned int' to 'const float', possible loss of data
-     1>Interface.cpp(132): warning C4018: '>=' : signed/unsigned mismatch
          GraphicDevice.cpp
          GameObject.cpp
          GameError.cpp
@@ -64,4 +61,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:33.35
+Time Elapsed 00:00:33.82

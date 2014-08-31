@@ -12,10 +12,28 @@ Button::Button(const GameObject& gameObject, const std::string message, Function
 
 
 Button::Button(const GameObject& gameObject, const std::string message, InterfaceMethod interfaceMethod, Interface * _interface)
-	: GameObject(gameObject), message(message), _interface(_interface), index(1), click(false)
+	: GameObject(gameObject), message(message), index(1), click(false)
 {
 	indicatorFunction.interfaceMethod = interfaceMethod;
+	object._interface = _interface;
 }
+
+Button::Button(const GameObject& gameObject, const std::string message, InterfaceTrain interfaceMethod, Interface * _interface, Train * train)
+	: GameObject(gameObject), message(message), index(2), click(false)
+{
+	indicatorFunction.interfaceTrain = interfaceMethod;
+	object._interface = _interface;
+	parametr.train =train;
+}
+
+Button::Button(const GameObject& gameObject, const std::string message, TrainMethod trainMethod, Train * train, MapElement *mapElement)
+	: GameObject(gameObject), message(message), index(3), click(false)
+{
+	indicatorFunction.trainMethod = trainMethod;
+	object.train = train;
+	parametr.mapElement = mapElement;
+}
+
 
 
 Button::~Button()
@@ -42,10 +60,18 @@ void Button::onMouseClickLeft()
 			indicatorFunction.function();
 		break;
 	case 1:
-		if(indicatorFunction.interfaceMethod!=NULL && _interface!=NULL)
-			(_interface->*indicatorFunction.interfaceMethod)(); 
+		if(indicatorFunction.interfaceMethod!=NULL && object._interface!=NULL)
+			(object._interface->*indicatorFunction.interfaceMethod)(); 
 		break;
-	default:
-		break;
+	case 2:
+		{
+			if(indicatorFunction.interfaceTrain!=NULL && object._interface!=NULL)
+				(object._interface->*indicatorFunction.interfaceTrain)(parametr.train);
+		}break;
+	case 3:
+		{
+			if(indicatorFunction.trainMethod!=NULL && object.train!=NULL)
+				(object.train->*indicatorFunction.trainMethod)(parametr.mapElement);
+		}break;
 	}	
 }

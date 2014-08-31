@@ -2,7 +2,7 @@
 #include "MapElement.h"
 
 
-MapElement::MapElement(const GameObject& gameObject, const std::string name, const std::string connectionsListFile) :GameObject(gameObject), name(name), info(NULL), markTexture(NULL)
+MapElement::MapElement(const GameObject& gameObject, const std::string name, const std::string connectionsListFile) :GameObject(gameObject), name(name), info(NULL), selectTexture(NULL)
 {
 	std::ifstream fileConnectionList(connectionsListFile);
 	if (fileConnectionList.is_open())
@@ -24,7 +24,7 @@ MapElement::~MapElement()
 
 void MapElement::onMouseOver()
 {
-	if (info == NULL &&!connect)
+	if (info == NULL && selectState==waiting)
 	{
 		Vector2 basicInfoSize = getCenterPosition() - (cityInfoSize / 2);
 		if (basicInfoSize.get_X() < 200)basicInfoSize.set_X(200);
@@ -38,45 +38,49 @@ void MapElement::onMouseOver()
 
 void MapElement::onMouseClickLeft()
 {
-	if (markTexture != NULL)
-		_interface->setTarget2(this);
+	if (selectTexture != NULL)
+		_interface->setTarget(this);
 }
 
 void MapElement::setConnected(MapElement *mapElement)
 {
 	if (mapElement != NULL)
 	{		
-		connections.push_back(mapElement);
+		connections.push_back(mapElement->getName());
 		permittedConnections.remove(mapElement->name);
-
-		connect=false;
+		selectState=  (MapElementSelectState)(selectState| ~select);
+		UnSelect();
 	}
 }
-
 
 void MapElement::update()
 {
 	GameObject::update();
-	if (connect)
-	{		
-		if ( markTexture==NULL && (std::find(permittedConnections.begin(), permittedConnections.end(), _interface->getTarget()->getName())) !=  permittedConnections.end())
-		{
-			markTexture = Textures::getTexture(markTextureName);
-		}
-	}
-	else
+
+	switch(selectState)
 	{
-		if (markTexture != NULL)//co lepiej? co pêtlê nadpisywaæ czy sprawdaæ i raz napisaæ 
-			markTexture = NULL;
+	case (6):
+		{
+			if((std::find(permittedConnections.begin(), permittedConnections.end(), _interface->getTarget()->getName())) !=  permittedConnections.end())
+				Select();
+		}break;
+	case(10):
+		{
+			if((std::find(connections.begin(),connections.end(), _interface->getTarget()->getName())) != connections.end())
+				Select();
+		}break;
 	}
+
+	if((selectState & notSelect)==notSelect)
+		UnSelect();
 }
 
 void MapElement::draw()
 {
-	if (markTexture != NULL)
-		GraphicDevice::drawTexture(markTexture, position - Vector2(10, 10), size + Vector2(20, 20));
+	if (selectTexture != NULL)
+		GraphicDevice::drawTexture(selectTexture, position - Vector2(10, 10), size + Vector2(20, 20));
 	GameObject::draw();
 }
 
 Interface * MapElement::_interface = NULL;
-bool MapElement::connect = false;
+MapElementSelectState MapElement::selectState = notSelect;

@@ -10,18 +10,30 @@
 class Interface;
 class BasicInfo;
 
+enum MapElementSelectState
+{
+	notSelect =1,
+	select =2,
+	conecting=4,
+	routing=8
+};
+
+inline const MapElementSelectState operator|(MapElementSelectState v1, MapElementSelectState v2)
+{
+	return static_cast<MapElementSelectState>(static_cast<int>(v1)|static_cast<int>(v2));
+}
+
 class MapElement : public GameObject
 {	
 	typedef std::list<std::string> StringList;
-	typedef std::list<MapElement *> ConnectionsList;
 
 protected:
-	SDL_Texture* markTexture;
+	SDL_Texture* selectTexture;
 	std::string name;
 	BasicInfo * info;
 	StringList permittedConnections;
-	ConnectionsList connections;
-	static bool connect;
+	StringList connections;
+	static MapElementSelectState selectState; 
 public:	
 	static Interface * _interface;
 
@@ -33,20 +45,22 @@ public:
 	void update();
 	void draw();
 
+	void Select();
+	void UnSelect();
 	void onMouseOver();
 	void onMouseClickLeft();
 	void setConnected(MapElement *);
-	static void setConnect(const bool);
-	static const bool getConnect(); 
+	static void setState(const MapElementSelectState);
+	static const MapElementSelectState getState(); 
 };
-inline const bool MapElement::getConnect()
+inline const MapElementSelectState MapElement::getState()
 {
-	return connect;
+	return selectState;
 }
 
-inline void MapElement::setConnect(const bool value)
+inline void MapElement::setState(const MapElementSelectState value)
 {
-	MapElement::connect = value;;
+	selectState = value;
 }
 
 inline const std::string MapElement::getName()const
@@ -54,6 +68,15 @@ inline const std::string MapElement::getName()const
 	return name;
 }
 
+inline void MapElement::Select()
+{
+	selectTexture = Textures::getTexture(markTextureName);
+}
+
+inline void MapElement::UnSelect()
+{
+	selectTexture = NULL;
+}
 
 class City : public MapElement
 {

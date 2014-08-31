@@ -26,7 +26,7 @@ City::~City()
 
 void City::onMouseOver()
 {
-	if (info == NULL && !connect)
+	if (info == NULL && selectState == notSelect)
 	{
 		Vector2 cityInfoPos = getCenterPosition() - (cityInfoSize / 2);
 		if (cityInfoPos.get_X() < 200)cityInfoPos.set_X(200);

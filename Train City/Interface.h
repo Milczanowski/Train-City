@@ -17,20 +17,36 @@ class Player;
 
 typedef void(*Function)(void);
 typedef void(Interface::*InterfaceMethod)(void);
+typedef void(Interface::*InterfaceTrain)(Train *);
+typedef void(Train::*TrainMethod)(MapElement*);
 
 union IndicatorFunction
 {
-public:
 	Function function;
 	InterfaceMethod interfaceMethod;
+	InterfaceTrain interfaceTrain;
+	TrainMethod trainMethod;
+};
+
+union Object
+{
+	Interface * _interface;
+	Train *train;
+};
+
+union Parametr
+{
+	MapElement *mapElement;
+	Train *train;
 };
 
 class Button : public GameObject
 {
 protected:
 	std::string message;
-	Interface * _interface;
+	Object object;
 	IndicatorFunction indicatorFunction;
+	Parametr parametr;
 	int index;
 	bool click;
 public:
@@ -38,6 +54,8 @@ public:
 	Button(const GameObject&, const std::string);
 	Button(const GameObject&, const std::string, Function);
 	Button(const GameObject&, const std::string, InterfaceMethod, Interface *);
+	Button(const GameObject&, const std::string, InterfaceTrain, Interface *, Train*);
+	Button(const GameObject&, const std::string, TrainMethod, Train *, MapElement*);
 
 	virtual ~Button();
 	void draw();
@@ -58,21 +76,39 @@ inline const bool Button::wasPressed()
 
 typedef std::list<Button> ButtonList;
 
+enum InterfaceState
+{
+	waiting = 0,
+	buyingTrain = 1,
+	connectsCity,
+	displaysTrains,
+	displaysTrainOptions,
+	selectTrainTarget
+};
+
+union Target
+{
+	MapElement * mapElement;
+	Train * train;
+};
+
+
+
 class Interface : public GameObject
 {
 private:
-	void refresh();
+	void cityOptions();
 	void buyTrain();
 	void showTrains();
-
+	void selectTrain(Train *);
 	void up();
 	void down();
-
+	void trainGoTo();
 	unsigned int index;
 protected:
 	Map * map;
-	MapElement * target , *target2;
-	int interfaceState;
+	Target target;
+	InterfaceState interfaceState;
 	ButtonList buttonList;
 	void connectMapElement();
 	void addPassengerTrain();
@@ -81,7 +117,6 @@ public:
 	virtual ~Interface();
 	void setTarget(MapElement *);
 	void setTarget(const std::string);
-	void setTarget2(MapElement *);
 	void update();
 	void draw();
 
@@ -89,16 +124,13 @@ public:
 };
 
 
-
 inline const MapElement * Interface::getTarget()const
 {
-	return target;
+	return target.mapElement;
 }
 
-inline void Interface::setTarget2(MapElement * target2)
-{
-	this->target2 = target2;
-}
+
+
 
 
 
