@@ -100,7 +100,7 @@ private:
 	void cityOptions();
 	void buyTrain();
 	void showTrains();
-	void selectTrain(Train *);
+	void selectTrain(Train * const);
 	void up();
 	void down();
 	void trainGoTo();
@@ -113,9 +113,9 @@ protected:
 	void connectMapElement();
 	void addPassengerTrain();
 public:
-	Interface(const GameObject &, Map *);
+	Interface(const GameObject &, Map *const);
 	virtual ~Interface();
-	void setTarget(MapElement *);
+	void setTarget(MapElement *const);
 	void setTarget(const std::string);
 	void update();
 	void draw();

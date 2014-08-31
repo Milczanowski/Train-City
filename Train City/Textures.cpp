@@ -107,7 +107,7 @@ TextureMap Textures::initializeHashmap()
 {
 	int flags=IMG_INIT_JPG|IMG_INIT_PNG;
 	int initted=IMG_Init(flags);
-	if(initted&flags != flags)throw GameError("Failed to init required jpg or png support: ", SDL_GetError());
+	if((initted&flags) != flags)throw GameError("Failed to init required jpg or png support: ", SDL_GetError());
 
 	TextureMap _tm;
 	return _tm;

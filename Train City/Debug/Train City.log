@@ -1,16 +1,15 @@
-﻿Build started 2014-08-31 05:12:31.
+﻿Build started 2014-08-31 15:34:31.
      1>Project "C:\Users\Basia\Documents\Train-City\Train City\Train City.vcxproj" on node 2 (build target(s)).
        Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>InitializeBuildStatus:
          Creating "Debug\Train City.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt BasicInfo.cpp Button.cpp Delay.cpp GameError.cpp GameObject.cpp GraphicDevice.cpp Interface.cpp Map.cpp MapElement.cpp Mouse.cpp PassengerTrain.cpp Player.cpp Product.cpp ProductsManager.cpp RailroadTracks.cpp Textures.cpp Time.cpp Train.cpp Vector2.cpp main.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt BasicInfo.cpp Button.cpp City.cpp CityInfo.cpp Delay.cpp GameError.cpp GameObject.cpp GraphicDevice.cpp Interface.cpp Map.cpp MapElement.cpp Mouse.cpp PassengerTrain.cpp Player.cpp Product.cpp ProductsManager.cpp RailroadTracks.cpp Textures.cpp Time.cpp Train.cpp Vector2.cpp main.cpp
          main.cpp
          Vector2.cpp
          Train.cpp
          Time.cpp
          Textures.cpp
-     1>Textures.cpp(110): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
          RailroadTracks.cpp
          ProductsManager.cpp
          Product.cpp
@@ -24,6 +23,8 @@
          GameObject.cpp
          GameError.cpp
          Delay.cpp
+         CityInfo.cpp
+         City.cpp
          Button.cpp
          BasicInfo.cpp
        Link:
@@ -61,4 +62,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:33.82
+Time Elapsed 00:00:39.49

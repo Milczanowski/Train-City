@@ -24,7 +24,7 @@ MapElement::~MapElement()
 
 void MapElement::onMouseOver()
 {
-	if (info == NULL && selectState==waiting)
+	if (info == NULL && (selectState&notSelect) ==notSelect)
 	{
 		Vector2 basicInfoSize = getCenterPosition() - (cityInfoSize / 2);
 		if (basicInfoSize.get_X() < 200)basicInfoSize.set_X(200);

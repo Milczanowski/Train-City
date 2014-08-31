@@ -35,14 +35,15 @@ Map::~Map()
 void Map::draw()
 {
 	GameObject::draw();
-	for (MapElements::iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
-	{
-		(*iter)->draw();
-	}
 
 	for(RailroadTracksList::const_iterator iter = railroadTrackList.begin(); iter != railroadTrackList.end(); iter++)
 	{
 		iter->draw();
+	}
+
+	for (MapElements::iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
+	{
+		(*iter)->draw();
 	}
 }
 

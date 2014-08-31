@@ -33,7 +33,7 @@ public:
 	static Vector2 getWindowSize(void);
 
 	static void drawTexture(SDL_Texture *texture, const  Vector2 position,const Vector2 size);
-	static void drawTexture(SDL_Texture *texture,const Vector2 position,const Vector2 size, float angle);
+	static void drawTexture(SDL_Texture *texture,const Vector2 position,const Vector2 size, const float angle);
 	static void drawText(const std::string text,const SDL_Color textColor,const  Vector2 position,const float size);
 	static void begin(void);
 	static void end(void);
@@ -101,7 +101,7 @@ inline void GraphicDevice::drawTexture(SDL_Texture *texture, const  Vector2 posi
 	SDL_RenderCopy(getRenderer(),texture,NULL, &rect);
 }
 
-inline void GraphicDevice::drawTexture(SDL_Texture *texture, const  Vector2 position,const Vector2 size, float angle)
+inline void GraphicDevice::drawTexture(SDL_Texture *texture, const  Vector2 position,const Vector2 size,const float angle)
 {
 	SDL_Rect rect;
 	rect.x = (int)position.get_X();

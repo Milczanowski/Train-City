@@ -20,19 +20,19 @@ public:
 	static Player & getInstance();
 	static void free();
 
-	void addTrain(Train *);
-	TrainList * getTrainList();
+	void addTrain(Train *const);
+	TrainList *const getTrainList();
 
 	friend std::ostream & operator<< (std::ostream &, const Player &);
 	friend std::istream & operator>> (std::istream &, Player &);
 };
 
-inline TrainList * Player::getTrainList()
+inline TrainList * const Player::getTrainList()
 {
 	return & trainList;
 }
 
-inline void Player::addTrain(Train * train)
+inline void Player::addTrain(Train * const train)
 { 
 	trainList.push_back(train);
 }

@@ -10,18 +10,18 @@ typedef std::list<Button> ButtonList;
 class Train
 {
 protected:
-	MapElement *target;
+	MapElement * target;
 	unsigned int capacity, currentBurden;
 private:
 	float averageSpeed;
 	Delay delay;
 public:
-	void goTo(MapElement *);
+	void goTo(MapElement *const);
 	const bool isReady()const;
 	virtual const std::string getType()const = 0;
 	virtual void load(unsigned int *)=0;
 	virtual void unload(unsigned int *)=0;
-	Train(const float,const unsigned int, MapElement *);
+	Train(const float,const unsigned int,MapElement * const);
 	~Train(void);
 };
 
@@ -29,7 +29,7 @@ public:
 class PassengerTrain :public Train
 {
 public:
-	PassengerTrain(const float,const unsigned int, MapElement *);
+	PassengerTrain(const float,const unsigned int,MapElement * const);
 	virtual ~PassengerTrain(void);
 	void load(unsigned int *);
 	void unload(unsigned int *);

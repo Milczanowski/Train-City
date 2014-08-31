@@ -2,7 +2,7 @@
 #include "PassengerTrain.h"
 
 
-PassengerTrain::PassengerTrain(const float averageSpeed,const unsigned int capacity, MapElement * target):Train(averageSpeed, capacity,target)
+PassengerTrain::PassengerTrain(const float averageSpeed,const unsigned int capacity, MapElement *const target):Train(averageSpeed, capacity,target)
 {
 }
 

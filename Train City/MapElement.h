@@ -49,7 +49,7 @@ public:
 	void UnSelect();
 	void onMouseOver();
 	void onMouseClickLeft();
-	void setConnected(MapElement *);
+	void setConnected(MapElement *const);
 	static void setState(const MapElementSelectState);
 	static const MapElementSelectState getState(); 
 };
