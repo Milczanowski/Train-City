@@ -11,7 +11,6 @@ class MapElement;
 typedef std::list<MapElement*> MapElements;
 typedef std::list<RailroadTracks> RailroadTracksList;
 
-
 class Map : public GameObject
 {	
 private:
@@ -28,6 +27,8 @@ public:
 	void addRailroadTracks(const RailroadTracks &);
 	MapElement * findCity(const std::string)const;
 };
+
+
 
 inline void Map::addRailroadTracks(const RailroadTracks& railroadTrack)
 {

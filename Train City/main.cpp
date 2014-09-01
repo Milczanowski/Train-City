@@ -29,6 +29,8 @@ int main(int argc, char* argv[])
 				map.draw();
 				_interface.draw();
 				_time.draw(GraphicDevice::getColor(255, 255, 255, 255), Vector2(0, 0), 16);
+				Player::getInstance().drawTrains();
+				Player::getInstance().drawCash(Vector2(100,0),16);
 			}
 			GraphicDevice::end();
 			SDL_PollEvent(&_event);

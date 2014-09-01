@@ -1,2 +1,3 @@
 #pragma once
-#include "train.h"
+#include "FreightTrain.h"
+

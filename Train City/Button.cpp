@@ -10,15 +10,14 @@ Button::Button(const GameObject& gameObject, const std::string message, Function
 	indicatorFunction.function = function;
 }
 
-
-Button::Button(const GameObject& gameObject, const std::string message, InterfaceMethod interfaceMethod, Interface * _interface)
+Button::Button(const GameObject& gameObject, const std::string message, InterfaceMethod interfaceMethod, Interface *const  _interface)
 	: GameObject(gameObject), message(message), index(1), click(false)
 {
 	indicatorFunction.interfaceMethod = interfaceMethod;
 	object._interface = _interface;
 }
 
-Button::Button(const GameObject& gameObject, const std::string message, InterfaceTrain interfaceMethod, Interface * _interface, Train * train)
+Button::Button(const GameObject& gameObject, const std::string message, InterfaceTrain interfaceMethod, Interface * const _interface, Train * const train)
 	: GameObject(gameObject), message(message), index(2), click(false)
 {
 	indicatorFunction.interfaceTrain = interfaceMethod;
@@ -26,15 +25,13 @@ Button::Button(const GameObject& gameObject, const std::string message, Interfac
 	parametr.train =train;
 }
 
-Button::Button(const GameObject& gameObject, const std::string message, TrainMethod trainMethod, Train * train, MapElement *mapElement)
+Button::Button(const GameObject& gameObject, const std::string message, TrainMethod trainMethod, Train * const train,const unsigned int diffrence)
 	: GameObject(gameObject), message(message), index(3), click(false)
 {
 	indicatorFunction.trainMethod = trainMethod;
 	object.train = train;
-	parametr.mapElement = mapElement;
+	parametr.diffrence = diffrence;
 }
-
-
 
 Button::~Button()
 {
@@ -47,7 +44,7 @@ Button::Button():GameObject(Vector2(0,0),Vector2(0,0),0,NULL),index(-1),click(fa
 void Button::draw()
 {
 	GameObject::draw();
-	GraphicDevice::drawText(message, GraphicDevice::getColor(0, 0, 0, 255), position,50);
+	GraphicDevice::drawText(message, GraphicDevice::getColor(0, 0, 0, 255), position,40);
 }
 
 void Button::onMouseClickLeft()
@@ -71,7 +68,7 @@ void Button::onMouseClickLeft()
 	case 3:
 		{
 			if(indicatorFunction.trainMethod!=NULL && object.train!=NULL)
-				(object.train->*indicatorFunction.trainMethod)(parametr.mapElement);
+				(object.train->*indicatorFunction.trainMethod)(parametr.diffrence);
 		}break;
 	}	
 }

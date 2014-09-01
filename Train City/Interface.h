@@ -17,8 +17,8 @@ class Player;
 
 typedef void(*Function)(void);
 typedef void(Interface::*InterfaceMethod)(void);
-typedef void(Interface::*InterfaceTrain)(Train *);
-typedef void(Train::*TrainMethod)(MapElement*);
+typedef void(Interface::*InterfaceTrain)(Train *const);
+typedef void(Train::*TrainMethod)(unsigned int);
 
 union IndicatorFunction
 {
@@ -36,7 +36,7 @@ union Object
 
 union Parametr
 {
-	MapElement *mapElement;
+	unsigned int diffrence;
 	Train *train;
 };
 
@@ -53,9 +53,9 @@ public:
 	Button();
 	Button(const GameObject&, const std::string);
 	Button(const GameObject&, const std::string, Function);
-	Button(const GameObject&, const std::string, InterfaceMethod, Interface *);
-	Button(const GameObject&, const std::string, InterfaceTrain, Interface *, Train*);
-	Button(const GameObject&, const std::string, TrainMethod, Train *, MapElement*);
+	Button(const GameObject&, const std::string, InterfaceMethod, Interface *const);
+	Button(const GameObject&, const std::string, InterfaceTrain, Interface *const, Train*const);
+	Button(const GameObject&, const std::string, TrainMethod, Train *const, const unsigned int);
 
 	virtual ~Button();
 	void draw();
@@ -86,13 +86,6 @@ enum InterfaceState
 	selectTrainTarget
 };
 
-union Target
-{
-	MapElement * mapElement;
-	Train * train;
-};
-
-
 
 class Interface : public GameObject
 {
@@ -104,14 +97,18 @@ private:
 	void up();
 	void down();
 	void trainGoTo();
+	void connectMapElement();
+	void addPassengerTrain();
+	void addTankerTrain();
+	void addCoalTrain();
+	void addCarTrain();
 	unsigned int index;
 protected:
 	Map * map;
-	Target target;
+	MapElement * mapElement;
+	Train * train;
 	InterfaceState interfaceState;
 	ButtonList buttonList;
-	void connectMapElement();
-	void addPassengerTrain();
 public:
 	Interface(const GameObject &, Map *const);
 	virtual ~Interface();
@@ -120,13 +117,13 @@ public:
 	void update();
 	void draw();
 
-	const MapElement * getTarget()const;
+	const MapElement * const getTarget()const;
 };
 
 
-inline const MapElement * Interface::getTarget()const
+inline const MapElement * const Interface::getTarget()const
 {
-	return target.mapElement;
+	return mapElement;
 }
 
 

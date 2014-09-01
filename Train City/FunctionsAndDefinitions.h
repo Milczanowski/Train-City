@@ -27,7 +27,15 @@ static const std::string markTextureName = "markTexture.png";
 const Vector2 cityInfoSize(300, 150);
 const Vector2 basicInfoSize(100, 20);
 
-
+namespace TemplateVariables
+{
+extern char oil[];
+extern char tankerTrain[];
+extern char coal[];
+extern char coalTrain[];
+extern char car[];
+extern char carTrain[];
+}
 
 template <typename T>
 inline const std::string ToString(const T value)

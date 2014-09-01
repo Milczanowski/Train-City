@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-Player::Player(void)//: shipHealth(100),playerEnergy(100), scor(0)
+Player::Player(void):cash(1000)
 {
 
 }
@@ -10,6 +10,58 @@ Player::Player(void)//: shipHealth(100),playerEnergy(100), scor(0)
 Player::~Player(void)
 {
 }
+
+void Player::drawTrains()const
+{
+	for(TrainList::const_iterator iter = trainList.begin();iter!=trainList.end();iter++)
+		(*iter)->draw();
+}
+
+void Player::drawCash(const Vector2 & position, const float textSize )const
+{
+	if(cash>0)
+		GraphicDevice::drawText(ToString(cash)+"$",GraphicDevice::getColor(255,255,255,255),position, textSize);
+	else
+		GraphicDevice::drawText(ToString(cash)+"$",GraphicDevice::getColor(255,0,0,255),position, textSize);
+}
+
+ void Player::addCash(const unsigned int value)
+{
+	cash+=value;
+}
+
+ void Player::removeCash(const unsigned int value)
+{
+	cash-=value;
+}
+
+ const TrainList Player::getTrainList()const
+{
+	return trainList;
+}
+
+ Player & Player::getInstance()
+{
+	if(instance==NULL)
+		instance = new Player();
+
+	return *instance;	
+}
+
+ const TrainList::iterator Player::beginTrainList()
+{
+	return trainList.begin();
+}
+
+ const TrainList::iterator Player::endTrainList()
+{
+	return trainList.end();
+}
+ void Player::addTrain(Train * const train)
+{
+	 trainList.push_back(train);
+}
+
 
 void Player::free()
 {

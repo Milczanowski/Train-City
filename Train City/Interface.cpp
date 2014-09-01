@@ -4,7 +4,7 @@
 
 
 
-Interface::Interface(const GameObject & gameObject, Map * const map) :GameObject(gameObject), map(map), index(0), interfaceState(waiting)
+Interface::Interface(const GameObject & gameObject, Map * const map) :GameObject(gameObject), map(map), index(0), interfaceState(waiting), train(NULL), mapElement(NULL)
 {
 	showTrains();
 }
@@ -36,7 +36,14 @@ void Interface::update()
 		}break;
 	case displaysTrainOptions:
 		{
-			selectTrain(target.train);
+			selectTrain(train);
+		}break;
+	case waiting:
+		{
+			if(mapElement!=NULL && train!=NULL)
+			{
+					mapElement->onMouseOver();
+			}
 		}break;
 	}
 }	
@@ -49,9 +56,9 @@ void Interface::trainGoTo()
 
 void Interface::connectMapElement()
 {
-	if (target.mapElement!=NULL)
+	if (mapElement!=NULL)
 	{
-		target.mapElement->setState(conecting|select);
+		mapElement->setState(conecting|select);
 		interfaceState = connectsCity;
 	}
 }
@@ -65,26 +72,35 @@ void Interface::setTarget(MapElement * const target)
 		{
 		case waiting:
 			{
-				this->target.mapElement = target;
+				this->mapElement = target;
 				cityOptions();
 			}break;
 		case connectsCity:
 			{
-				this->target.mapElement->setConnected(target);
-				target->setConnected(this->target.mapElement);
-
-				map->addRailroadTracks(RailroadTracks(this->target.mapElement->getCenterPosition(),target->getCenterPosition()));
-				this->target.mapElement->setState(notSelect);
+				train =NULL;
+				this->mapElement->setConnected(target);
+				target->setConnected(this->mapElement);
+				Player::getInstance().removeCash((unsigned int)this->mapElement->getCenterPosition().distance(target->getCenterPosition()));
+				map->addRailroadTracks(RailroadTracks(this->mapElement->getCenterPosition(),target->getCenterPosition()));
+				this->mapElement->setState(notSelect);
 				interfaceState = waiting;
+
 			}break;
 		case selectTrainTarget:
 			{
-				this->target.train->goTo(NULL);
+				this->train->goTo(target);
+				MapElement::setState(notSelect);
+				interfaceState = waiting; 
+				train = NULL;
+				mapElement = NULL;
+				showTrains();
 			}break;
 		}
 	}
 	else
 	{
+		mapElement= NULL;
+		train = NULL;
 		interfaceState = waiting;
 		showTrains();
 	}
@@ -98,7 +114,7 @@ void Interface::setTarget(const std::string name)
 void Interface::cityOptions()
 {
 	buttonList.clear();
-	if (target.mapElement != NULL)
+	if (mapElement != NULL)
 	{
 		buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "Connect", &Interface::connectMapElement, this));
 		buttonList.push_back(Button(GameObject(position + Vector2(10, 115), Vector2(180,100),0, Textures::getTexture("errorImage")), "Buy Train", &Interface::buyTrain, this));
@@ -111,16 +127,47 @@ void Interface::cityOptions()
 
 void Interface::addPassengerTrain()
 {
-	if(target.mapElement!=NULL)
+	if(mapElement!=NULL)
 	{		
 		MapElement::setState(notSelect);
-		Player::getInstance().addTrain(new PassengerTrain(100,80,target.mapElement));
+		Player::getInstance().addTrain(new PassengerTrain(0.05f,80,mapElement));
+		Player::getInstance().removeCash(500);
+	}
+}
+
+void Interface::addCoalTrain()
+{
+	if(mapElement!=NULL)
+	{		
+		MapElement::setState(notSelect);
+		Player::getInstance().addTrain(new FreightTrain<TemplateVariables::coal,TemplateVariables::coalTrain>(0.01f,100,mapElement));
+		Player::getInstance().removeCash(800);
+	}
+}
+
+void Interface::addCarTrain()
+{
+	if(mapElement!=NULL)
+	{		
+		MapElement::setState(notSelect);
+		Player::getInstance().addTrain(new FreightTrain<TemplateVariables::car,TemplateVariables::carTrain>(0.025f,100,mapElement));
+		Player::getInstance().removeCash(900);
+	}
+}
+
+void Interface::addTankerTrain()
+{
+	if(mapElement!=NULL)
+	{		
+		MapElement::setState(notSelect);
+		Player::getInstance().addTrain(new FreightTrain<TemplateVariables::oil,TemplateVariables::tankerTrain>(0.03f,100,mapElement));
+		Player::getInstance().removeCash(1100);
 	}
 }
 
 void Interface::buyTrain()
 {
-	if(target.mapElement!=NULL)
+	if(mapElement!=NULL)
 	{
 		switch(interfaceState)
 		{
@@ -128,12 +175,15 @@ void Interface::buyTrain()
 			{
 				interfaceState = waiting;
 				buttonList.clear();
-				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(150,100),0,Textures::getTexture("errorImage")),"Passanger", &Interface::addPassengerTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(180,100),0,Textures::getTexture("errorImage")),"Passanger", &Interface::addPassengerTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),TemplateVariables::tankerTrain, &Interface::addTankerTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("errorImage")),TemplateVariables::carTrain, &Interface::addCarTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,340),Vector2(180,100),0,Textures::getTexture("errorImage")),TemplateVariables::coalTrain, &Interface::addCoalTrain,this)); 
 			}break;
 		default:
 			{
 				interfaceState = buyingTrain;
-				target.mapElement->setState(notSelect);
+				mapElement->setState(notSelect);
 			}break;
 		}
 	}
@@ -144,23 +194,23 @@ void Interface::showTrains()
 	buttonList.clear();
 	buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "UP", &Interface::up, this));
 	int i=0, name =0;
-
-	for(TrainList::const_iterator iter = Player::getInstance().getTrainList()->begin(); iter != Player::getInstance().getTrainList()->end(); iter++)
+	for(TrainList::iterator iter = Player::getInstance().beginTrainList(); iter != Player::getInstance().endTrainList(); iter++)
 	{
 		if(i>=(int)index && (*iter)->isReady())
 		{
-			buttonList.push_back(Button(GameObject(position + Vector2(10,120+ 110.0f*(i-index)), Vector2(180, 100), 0, Textures::getTexture("errorImage")), ToString<int>(i)+(*iter)->getType() , &Interface::selectTrain, this, *iter));	
+			buttonList.push_back(Button(GameObject(position + Vector2(10,110+ 105.0f*(name)), Vector2(180, 100), 0, Textures::getTexture("errorImage")), ToString<int>(i)+(*iter)->getType() , &Interface::selectTrain, this, (*iter)->get()));	
+			name++;
 			if(i >= (int)index+ 4)
 				break;
 		}
 		i++;
 	}
-	buttonList.push_back(Button(GameObject(position + Vector2(10, 690), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "DOWN", &Interface::down, this));
+	buttonList.push_back(Button(GameObject(position + Vector2(10, 640), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "DOWN", &Interface::down, this));
 }
 
 void Interface::up()
 {
-	if(index + 5  <  Player::getInstance().getTrainList()->size())
+	if(index + 5  <  Player::getInstance().getTrainList().size())
 		index++;
 
 	showTrains();
@@ -183,16 +233,18 @@ void Interface::selectTrain(Train * const train)
 		case displaysTrainOptions:
 			{
 				buttonList.clear();
-				target.train = train;
+				this->mapElement = train->getTarget();
 				interfaceState = waiting;
-				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(150,100),0,Textures::getTexture("errorImage")),"Go To",&Interface::trainGoTo,this));
-				if(typeid(train)!=typeid(PassengerTrain))
+				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(180,100),0,Textures::getTexture("errorImage")),"Go To",&Interface::trainGoTo,this));
+				if(typeid(*train)!=typeid(PassengerTrain))
 				{
-				
+					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),"Buy", &Train::load,train, 5)); 
+					buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("errorImage")),"Sell", &Train::unload,train, 5)); 
 				}
 			}break;
 		default:
 			{
+				this->train = train;
 				interfaceState = displaysTrainOptions;
 			}break;
 		}

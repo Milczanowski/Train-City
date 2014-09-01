@@ -4,6 +4,8 @@
 #include "ProductsManager.h"
 #include <list>
 
+class Product;
+typedef std::list<Product> Products;
 
 class BasicInfo :	public GameObject
 {
@@ -22,6 +24,7 @@ public:
 
 class CityInfo :public BasicInfo
 {
+private:
 	Products * products;
 public:
 	CityInfo(const BasicInfo &, Products *);

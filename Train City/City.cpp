@@ -20,6 +20,18 @@ City::City(const MapElement& MapElement,  const std::string productsFileName) : 
 }
 
 
+const Products::iterator City::getProduct(const std::string name)
+{
+	for(Products::iterator iter = products.begin(); iter!=products.end();iter++)
+	{
+		if((*iter).getName()== name)
+			return iter;
+	}
+	throw GameError("Product not fount : ", name +"in City: "+this->name);
+}
+
+
+
 City::~City()
 {
 }

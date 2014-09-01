@@ -1,17 +1,20 @@
 #pragma once
 #include <iostream>
 #include <list>
-#include "PassengerTrain.h"
 #include "Interface.h"
+#include "PassengerTrain.h"
+
 
 class Train;
 class Interface;
+class MapElement;
 
 typedef std::list<Train *> TrainList;
 
 class Player
 {
 private:
+	int cash;
 	TrainList trainList;
 	static Player *instance;
 	Player(void);
@@ -19,30 +22,16 @@ private:
 public:
 	static Player & getInstance();
 	static void free();
-
-	void addTrain(Train *const);
-	TrainList *const getTrainList();
+	void addCash(const unsigned int);
+	void removeCash(const unsigned int);
+	void addTrain(Train * const);
+	const TrainList::iterator beginTrainList();
+	const TrainList::iterator endTrainList();
+	const TrainList getTrainList()const;
+	void drawTrains()const;
+	void drawCash(const Vector2 &, const float textSize)const;
 
 	friend std::ostream & operator<< (std::ostream &, const Player &);
 	friend std::istream & operator>> (std::istream &, Player &);
 };
-
-inline TrainList * const Player::getTrainList()
-{
-	return & trainList;
-}
-
-inline void Player::addTrain(Train * const train)
-{ 
-	trainList.push_back(train);
-}
-
-
-inline Player & Player::getInstance()
-{
-	if(instance==NULL)
-		instance = new Player();
-
-	return *instance;	
-}
 

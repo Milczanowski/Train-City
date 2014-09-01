@@ -17,6 +17,31 @@ MapElement::MapElement(const GameObject& gameObject, const std::string name, con
 	else throw GameError(connectionsListFile + ": file not found(MapElement)");
 }
 
+ const MapElementSelectState MapElement::getState()
+{
+	return selectState;
+}
+
+ void MapElement::setState(const MapElementSelectState value)
+{
+	selectState = value;
+}
+
+ const std::string MapElement::getName()const
+{
+	return name;
+}
+
+ void MapElement::Select()
+{
+	selectTexture = Textures::getTexture(markTextureName);
+}
+
+ void MapElement::UnSelect()
+{
+	selectTexture = NULL;
+}
+
 
 MapElement::~MapElement()
 {

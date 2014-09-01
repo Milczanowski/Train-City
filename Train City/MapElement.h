@@ -9,6 +9,8 @@
 
 class Interface;
 class BasicInfo;
+class Product;
+typedef std::list<Product> Products;
 
 enum MapElementSelectState
 {
@@ -53,30 +55,16 @@ public:
 	static void setState(const MapElementSelectState);
 	static const MapElementSelectState getState(); 
 };
-inline const MapElementSelectState MapElement::getState()
-{
-	return selectState;
-}
 
-inline void MapElement::setState(const MapElementSelectState value)
+class ProductsManager
 {
-	selectState = value;
-}
-
-inline const std::string MapElement::getName()const
-{
-	return name;
-}
-
-inline void MapElement::Select()
-{
-	selectTexture = Textures::getTexture(markTextureName);
-}
-
-inline void MapElement::UnSelect()
-{
-	selectTexture = NULL;
-}
+private:
+	Delay refreshDelay, upgradeDelay;		
+public:	
+	ProductsManager(const Delay &, const Delay &);
+	~ProductsManager();
+	void update(Products * products);
+};
 
 class City : public MapElement
 {
@@ -86,8 +74,12 @@ private:
 public:
 	City(const MapElement&, const std::string);
 	virtual ~City();
-
+	const Products::iterator getProduct(const std::string);
 	void onMouseOver();
 	void draw();
 	void update();
 };
+
+
+
+
