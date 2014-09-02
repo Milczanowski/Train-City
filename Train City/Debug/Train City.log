@@ -1,10 +1,10 @@
-﻿Build started 2014-09-02 23:51:03.
+﻿Build started 2014-09-03 00:03:59.
      1>Project "C:\Users\Basia\Documents\Train-City\Train City\Train City.vcxproj" on node 2 (build target(s)).
        Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>InitializeBuildStatus:
-         Touching "Debug\Train City.unsuccessfulbuild".
+         Creating "Debug\Train City.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt BasicInfo.cpp Button.cpp Delay.cpp FreightTrain.cpp FunctionsAndDefinitions.cpp GameError.cpp GameObject.cpp GameOver.cpp GraphicDevice.cpp Interface.cpp Map.cpp MapElement.cpp Mouse.cpp PassengerTrain.cpp Player.cpp Product.cpp ProductsManager.cpp RailroadTracks.cpp Schedule.cpp Textures.cpp Time.cpp Train.cpp Vector2.cpp main.cpp stdafx.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\Train City.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt City.cpp CityInfo.cpp Delay.cpp FreightTrain.cpp FunctionsAndDefinitions.cpp GameError.cpp GameObject.cpp GameOver.cpp GraphicDevice.cpp Interface.cpp Map.cpp MapElement.cpp Mouse.cpp PassengerTrain.cpp Player.cpp Product.cpp ProductsManager.cpp RailroadTracks.cpp Schedule.cpp Textures.cpp Time.cpp Train.cpp Vector2.cpp main.cpp stdafx.cpp
          stdafx.cpp
          main.cpp
      1>main.cpp(130): warning C4482: nonstandard extension used: enum 'MenuState' used in qualified name
@@ -31,8 +31,8 @@
          FunctionsAndDefinitions.cpp
          FreightTrain.cpp
          Delay.cpp
-         Button.cpp
-         BasicInfo.cpp
+         CityInfo.cpp
+         City.cpp
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Basia\Documents\Train-City\Debug\Train City.exe" /NOLOGO SDL2.lib SDL2main.lib SDL2test.lib SDL2_ttf.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Train City.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Basia\Documents\Train-City\Debug\Train City.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Basia\Documents\Train-City\Debug\Train City.lib" /MACHINE:X86 Debug\BasicInfo.obj
          Debug\Button.obj
@@ -72,4 +72,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:43.88
+Time Elapsed 00:00:43.90

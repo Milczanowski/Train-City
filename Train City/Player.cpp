@@ -75,7 +75,7 @@ void Player::free()
 
 void Player::updateTrains()
 {
-	if(cash<1000)
+	if(cash<-1000)
 		throw GameOver();
 
 	for(TrainList::iterator iter = trainList.begin();iter!=trainList.end();iter++)

@@ -145,6 +145,9 @@ int main(int argc, char* argv[])
 				{
 					if(_event.type == SDL_KEYDOWN)
 						container.menuState = menu;
+					GraphicDevice::begin();
+					GraphicDevice::drawTexture(Textures::getTexture("game_over.jpg"),Vector2(0,0),Vector2(1000,800));
+					GraphicDevice::end();
 				};
 			}
 			SDL_PollEvent(&_event);
