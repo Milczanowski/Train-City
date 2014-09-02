@@ -2,15 +2,18 @@
 #include "Interface.h"
 #include "Button.h"
 
-
-
-Interface::Interface(const GameObject & gameObject, Map * const map) :GameObject(gameObject), map(map), index(0), interfaceState(waiting), train(NULL), mapElement(NULL)
+Interface::Interface(const GameObject & gameObject) :GameObject(gameObject), index(0), interfaceState(waiting), train(NULL), mapElement(NULL),map(NULL)
 {
-	showTrains();
 }
 
 Interface::~Interface()
 {
+}
+
+void Interface::setMapPionter(Map * const map)
+{
+	this->map = map;
+	showTrains();
 }
 
 void Interface::draw()
@@ -94,6 +97,18 @@ void Interface::setTarget(MapElement * const target)
 				train = NULL;
 				mapElement = NULL;
 				showTrains();
+			}break;
+		case trainPlying:
+			{
+				if(typeid(*train)==typeid(PassengerTrain))
+				{
+					map->getSchedule()->add(dynamic_cast<PassengerTrain*>(train),mapElement, target);
+					MapElement::setState(notSelect);
+					interfaceState = waiting; 
+					train = NULL;
+					mapElement = NULL;
+					showTrains();
+				}
 			}break;
 		}
 	}
@@ -241,6 +256,10 @@ void Interface::selectTrain(Train * const train)
 					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),"Buy", &Train::load,train, 5)); 
 					buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("errorImage")),"Sell", &Train::unload,train, 5)); 
 				}
+				else
+				{
+					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),"Plying", &Interface::trainSetPlying, this)); 
+				}
 			}break;
 		default:
 			{
@@ -249,5 +268,14 @@ void Interface::selectTrain(Train * const train)
 			}break;
 		}
 		
+	}
+}
+
+void Interface::trainSetPlying()
+{
+	if(train!=NULL & mapElement!=NULL)
+	{
+		interfaceState=trainPlying;
+		MapElement::setState(select|routing);
 	}
 }

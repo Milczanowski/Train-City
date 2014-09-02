@@ -16,3 +16,4 @@ void RailroadTracks::draw()const
 {
 	SDL_RenderDrawLine(GraphicDevice::getRenderer(), (int)start.get_X(), (int)start.get_Y(), (int)end.get_X(), (int)end.get_Y());
 }
+

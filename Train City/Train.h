@@ -40,6 +40,7 @@ public:
 	virtual ~PassengerTrain(void);
 	void load(const unsigned int );
 	void unload(const unsigned int );
+	void update();
 	virtual const std::string getType()const;
 };
 
@@ -79,6 +80,7 @@ void FreightTrain< productName, trainName>::unload(const unsigned int value)
 				if(currentBurden>0)
 				{
 					getProduct(productName)->add();
+
 					currentBurden--;
 				}else
 					break;
@@ -99,7 +101,7 @@ void FreightTrain< productName, trainName>::load(const unsigned int value)
 			{
 				if(getProduct(productName)->getCount() >0 && currentBurden<capacity)
 				{
-					getProduct(productName)->remove();
+					getProduct(productName)->remove(true);
 					currentBurden++;
 				}else
 					break;

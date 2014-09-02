@@ -4,9 +4,11 @@
 #include <fstream>
 #include "MapElement.h"
 #include "RailroadTracks.h"
+#include "Schedule.h"
 
 class City;
 class MapElement;
+class Schedule;
 
 typedef std::list<MapElement*> MapElements;
 typedef std::list<RailroadTracks> RailroadTracksList;
@@ -16,9 +18,10 @@ class Map : public GameObject
 private:
 	MapElements mapElements;
 	RailroadTracksList railroadTrackList;
+	Schedule * schedule;
 public:
 	Map(const GameObject &, std::string );
-	~Map();
+	virtual ~Map();
 
 	void draw();
 	void update();
@@ -26,6 +29,7 @@ public:
 	void onMouseClickRight();
 	void addRailroadTracks(const RailroadTracks &);
 	MapElement * findCity(const std::string)const;
+	Schedule * const getSchedule()const;
 };
 
 

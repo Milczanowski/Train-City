@@ -14,26 +14,25 @@ PassengerTrain::~PassengerTrain(void)
 
 void PassengerTrain::load(const unsigned int  value)
 {
-	//currentBurden+=value;
-	//if(currentBurden>capacity)
-	//{
-	//	unsigned int overload = currentBurden%capacity;
-	//	currentBurden = capacity;
-	//	return overload;
-	//}
-	//return 0;
+	for(unsigned int i = 0; i< capacity; ++i)
+	{
+		if(getProduct("People")->getCount()>0)
+		{
+			getProduct("People")->remove(false);
+		}
+	}
+}
+
+void PassengerTrain::update()
+{
+	if(delay.isRedy())
+	{
+		currentBurden= 0;
+		load(capacity);
+	}
 }
 
 void PassengerTrain::unload(const unsigned int value)
 {
-	//int c = currentBurden;
-	//if(c-value <0)
-	//{
-	//	unsigned int currentValue = currentBurden;
-	//	currentBurden = 0;
-	//	return currentValue;
-	//}
-	//currentBurden-=value;
-	//return value;
 }
 

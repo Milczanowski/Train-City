@@ -19,7 +19,7 @@ public:
 	GameObject(const Vector2 position, const Vector2 size, const float angle,SDL_Texture* texture);
 	virtual~GameObject(void);
 
-	virtual void draw();
+	virtual void draw()const;
 	virtual void update();
 	virtual void onMouseOver();
 	virtual void onMouseNotOver();

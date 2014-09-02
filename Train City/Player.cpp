@@ -72,6 +72,17 @@ void Player::free()
 	}
 }
 
+void Player::updateTrains()
+{
+	for(TrainList::iterator iter = trainList.begin();iter!=trainList.end();iter++)
+	{
+		if(typeid(*(*iter))==typeid(PassengerTrain))
+		{
+			dynamic_cast<PassengerTrain*>((*iter))->update();
+		}
+	}
+}
+
 std::ostream & operator<< (std::ostream &w, const Player &p)
 {
 	return w;//<<p.shipHealth<<" "<<p.playerEnergy<<" "<<p.scor<<" ";

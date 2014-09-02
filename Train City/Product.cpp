@@ -15,25 +15,34 @@ Product::~Product()
 void Product::updatePrice()
 {
 	if (productionPerSecond < demandPerSecond)
-		price += 0.01f * price;
+		price += 0.001f * price;
 	else if (productionPerSecond > demandPerSecond)
-		price -= 0.01f * price;
+		price -= 0.001f * price;
 }
 
 void Product::add()
 {
 	count++;
 	Player::getInstance().addCash((unsigned int)price);
+	price*=0.99f;
 	updatePrice();
 }
 
-void Product::remove()
+void Product::remove(const bool value)
 {
 	if(count >0)
 	{
 		count--;
-		Player::getInstance().removeCash((unsigned int)price);
-		updatePrice();
+		if(value)
+		{
+			Player::getInstance().removeCash((unsigned int)price);
+			price*=1.01f;
+			updatePrice();
+		}
+		else
+		{
+			Player::getInstance().addCash((unsigned int)price);
+		}
 	}
 }
 
@@ -46,6 +55,7 @@ void Product::remove()
 {
 	return price;
 }
+
  const float Product::getCount()const
 {
 	return count;
@@ -58,7 +68,6 @@ void Product::remove()
 	GraphicDevice::drawText(ToString<float>(productionPerSecond / demandPerSecond), GraphicDevice::getColor(0, 0, 0, 275), position + Vector2(165, 0), size);
 	GraphicDevice::drawText(ToString<float>(count), GraphicDevice::getColor(0, 0, 0, 255), position + Vector2(220, 0), size);
 }
-
 
 void Product::update()
 {

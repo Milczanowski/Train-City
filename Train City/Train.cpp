@@ -45,10 +45,10 @@ void Train::goTo(MapElement * const target)
 		direction = Vector2(this->target->getCenterPosition().get_X()- target->getCenterPosition().get_X()
 			,this->target->getCenterPosition().get_Y()- target->getCenterPosition().get_Y());
 		distance = target->getCenterPosition().distance(this->target->getCenterPosition());
-		Player::getInstance().removeCash(distance/20);
+		Player::getInstance().removeCash((int)distance/20);
 
 		this->target= target;
-		delay = Delay((int)(distance/averageSpeed));
+		delay = Delay((int)((int)distance/averageSpeed));
 		delay.Restart();
 	}
 }

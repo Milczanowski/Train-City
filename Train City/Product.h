@@ -19,7 +19,7 @@ public:
 	const float getPrice()const;
 	const float getCount()const;
 	void add();
-	void remove();
+	void remove(const bool);
 	void update();
 	void upgrade();
 	void draw(const Vector2 &, const float)const;

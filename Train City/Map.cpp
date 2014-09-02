@@ -2,7 +2,7 @@
 #include "Map.h"
 
 
-Map::Map(const GameObject & gameObject, std::string fileName) :GameObject(gameObject)
+Map::Map(const GameObject & gameObject, std::string fileName) :GameObject(gameObject),schedule(new Schedule())
 {
 	std::ifstream cityFile(fileName);
 	if (cityFile.is_open())
@@ -29,8 +29,18 @@ Map::Map(const GameObject & gameObject, std::string fileName) :GameObject(gameOb
 
 Map::~Map()
 {
+	delete schedule;
+	for(MapElements::iterator iter = mapElements.begin();iter != mapElements.end();iter++)
+	{
+		delete (*iter);
+	}
 }
 
+
+Schedule * const Map::getSchedule()const
+{
+	return schedule;
+}
 
 void Map::draw()
 {
@@ -40,6 +50,7 @@ void Map::draw()
 	{
 		iter->draw();
 	}
+	Player::getInstance().updateTrains();
 
 	for (MapElements::iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
 	{
@@ -55,6 +66,8 @@ void Map::update()
 	{
 		(*iter)->update();
 	}
+
+	schedule->update();
 }
 
 void Map::onMouseClickLeft()

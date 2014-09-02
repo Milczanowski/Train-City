@@ -7,7 +7,7 @@
 class Product;
 typedef std::list<Product> Products;
 
-class BasicInfo :	public GameObject
+class BasicInfo :public GameObject
 {
 protected:
 	std::string name;

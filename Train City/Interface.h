@@ -83,7 +83,8 @@ enum InterfaceState
 	connectsCity,
 	displaysTrains,
 	displaysTrainOptions,
-	selectTrainTarget
+	selectTrainTarget,
+	trainPlying
 };
 
 
@@ -96,6 +97,7 @@ private:
 	void selectTrain(Train * const);
 	void up();
 	void down();
+	void trainSetPlying();
 	void trainGoTo();
 	void connectMapElement();
 	void addPassengerTrain();
@@ -110,13 +112,15 @@ protected:
 	InterfaceState interfaceState;
 	ButtonList buttonList;
 public:
-	Interface(const GameObject &, Map *const);
+	Interface(const GameObject &);
+
 	virtual ~Interface();
 	void setTarget(MapElement *const);
 	void setTarget(const std::string);
 	void update();
 	void draw();
-
+	void setMapPionter(Map * const);
+	void addButton(SDL_Texture *,  const std::string,  Function);
 	const MapElement * const getTarget()const;
 };
 
@@ -124,6 +128,11 @@ public:
 inline const MapElement * const Interface::getTarget()const
 {
 	return mapElement;
+}
+
+inline void Interface::addButton(SDL_Texture * texture  ,const std::string message, Function function)
+{
+	buttonList.push_back(Button(GameObject(position+ Vector2(10.0f,10.0f+ 110*buttonList.size()),Vector2(180.0f,100.0f),0,texture),message,function));
 }
 
 

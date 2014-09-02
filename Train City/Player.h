@@ -28,6 +28,7 @@ public:
 	const TrainList::iterator beginTrainList();
 	const TrainList::iterator endTrainList();
 	const TrainList getTrainList()const;
+	void updateTrains();
 	void drawTrains()const;
 	void drawCash(const Vector2 &, const float textSize)const;
 
