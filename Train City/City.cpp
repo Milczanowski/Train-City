@@ -50,7 +50,7 @@ void City::onMouseOver()
 	}
 }
 
-void City::draw()
+void City::draw()const
 {
 	MapElement::draw();
 	if (info != NULL)

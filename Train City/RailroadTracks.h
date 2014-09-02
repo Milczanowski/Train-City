@@ -12,5 +12,8 @@ public:
 	~RailroadTracks(void);
 
 	void draw()const;
+
+	friend std::ostream & operator<< (std::ostream &, const RailroadTracks &);
+	friend std::istream & operator>> (std::istream &, RailroadTracks &);
 };
 

@@ -100,7 +100,7 @@ void MapElement::update()
 		UnSelect();
 }
 
-void MapElement::draw()
+void MapElement::draw()const
 {
 	if (selectTexture != NULL)
 		GraphicDevice::drawTexture(selectTexture, position - Vector2(10, 10), size + Vector2(20, 20));

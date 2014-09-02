@@ -9,6 +9,7 @@ enum MenuState
 {
 	menu,
 	play,
+	gameStart,
 	gameExit
 };
 
@@ -18,26 +19,31 @@ public:
 	MenuState menuState;
 	Map *map;
 	Time *time;
+	Interface * _interface;
 
-	Container():map(NULL),time(NULL), menuState(menu){}
+	Container():map(NULL),time(NULL), menuState(menu), _interface(NULL){}
 
 	~Container()
 	{
 		delete map;
 		delete time;
+		delete _interface;
 	}
 };
 
 Container container;
-Interface * _interface;
+
 
 void start()
 {
+	if(container.map==NULL)
 		container.map = new Map(GameObject(Vector2(200, 0), Vector2(800, 800), 0, Textures::getTexture("map.png")), "Resources/cities.txt");
-		_interface->setMapPionter(container.map);
+	if(container.time==NULL)
 		container.time = new Time();
-		MapElement::_interface = _interface;
-		container.menuState=play;
+	if(container._interface==NULL)
+		container._interface = new Interface(GameObject(Vector2(0,20),Vector2(200,760),0,Textures::getTexture("interface.png")),container.map);
+		MapElement::_interface = container._interface;
+		container.menuState= play;
 }
 
 void exit()
@@ -45,6 +51,34 @@ void exit()
 	container.menuState=gameExit;
 }
 
+void save()
+{
+	if(container.time!=NULL && container.map!=NULL)
+	{
+		std::ofstream saveFile(resourcesPath+saveGameFile);
+		if(saveFile.is_open())
+		{
+		
+			saveFile<<*(container.time);
+			saveFile<<*(container.map);
+
+
+			saveFile.close();
+		}
+		else throw GameError("can not open file", resourcesPath+saveGameFile);
+	}
+}
+
+void load()
+{
+	std::ifstream loadFile(resourcesPath+saveGameFile);
+	if(loadFile.is_open())
+	{
+		start();
+		loadFile>>*(container.time);
+		loadFile>>*(container.map);
+	}
+}
 
 
 int main(int argc, char* argv[])
@@ -54,11 +88,13 @@ int main(int argc, char* argv[])
 		Textures::initialize();
 		SDL_Event _event; 
 		SDL_PollEvent(&_event);
-		_interface =new Interface(GameObject( Vector2(0,20), Vector2(200,760),0, Textures::getTexture("interface.png")));
 
-		_interface->addButton(Textures::getTexture("errorImage"),"Start",&start);
-		_interface->addButton(Textures::getTexture("errorImage"),"Exit",&exit);
-
+		ButtonList buttonList;
+		
+		buttonList.push_back(Button( GameObject(Vector2(410,100),Vector2(180,100),0,Textures::getTexture("errorImage")),"Start", &start));
+		buttonList.push_back(Button( GameObject(Vector2(410,210),Vector2(180,100),0,Textures::getTexture("errorImage")),"Save", &save));
+		buttonList.push_back(Button( GameObject(Vector2(410,320),Vector2(180,100),0,Textures::getTexture("errorImage")),"Load", &load));
+		buttonList.push_back(Button( GameObject(Vector2(410,430),Vector2(180,100),0,Textures::getTexture("errorImage")),"Exit", &exit));
 
 		while(container.menuState!=gameExit && _event.type !=SDL_QUIT)
 		{
@@ -67,10 +103,14 @@ int main(int argc, char* argv[])
 			{
 			case menu:
 				{
-					_interface->update();
+					
+					for(ButtonList::iterator iter  = buttonList.begin(); iter!=buttonList.end();iter++)
+						iter->update();
+
 					GraphicDevice::begin();
 					{
-						_interface->draw();
+						for(ButtonList::iterator iter  = buttonList.begin(); iter!=buttonList.end();iter++)
+							iter->draw();
 					}
 					GraphicDevice::end();
 
@@ -78,18 +118,21 @@ int main(int argc, char* argv[])
 			case play:
 				  {
 						container.map->update();
-						_interface->update();
+						container._interface->update();
 						container.time->update();
+						Player::getInstance().updateTrains();
 
 						GraphicDevice::begin();
 						{
 							container.map->draw();
 							Player::getInstance().drawCash(Vector2(100,0),16);
-							_interface->draw();
+							container._interface->draw();
 							container.time->draw(GraphicDevice::getColor(255, 255, 255, 255), Vector2(0, 0), 16);
-							Player::getInstance().drawTrains();
 						}
 						GraphicDevice::end();
+
+						if(_event.key.keysym.sym == SDLK_ESCAPE)
+							container.menuState = menu;
 				  }break;
 			}
 			SDL_PollEvent(&_event);
@@ -100,9 +143,6 @@ int main(int argc, char* argv[])
 		gameError.generateErrorLog(errorFile);
 	}
 	
-
-	delete _interface;
-
     return 0;
 }
 

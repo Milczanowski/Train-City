@@ -9,8 +9,9 @@ Player::Player(void):cash(1000)
 
 Player::~Player(void)
 {
+	for(TrainList::iterator iter = trainList.begin(); iter!=trainList.end();iter++)
+		delete (*iter);
 }
-
 void Player::drawTrains()const
 {
 	for(TrainList::const_iterator iter = trainList.begin();iter!=trainList.end();iter++)

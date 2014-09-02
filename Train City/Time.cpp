@@ -12,6 +12,17 @@ Time::~Time()
 {
 }
 
+std::ostream & operator<<(std::ostream & w, const Time & time)
+{
+	return w<<time.hour<<" "<<time.minute<<" "<<time.second<<" "<<time.millisecond<<std::endl;
+}
+
+std::istream & operator>> (std::istream & w, Time & time)
+{
+	return w>>time.hour>>time.minute>>time.second>>time.millisecond;
+}
+
+
 
 
 float Time::deltaTime = 0;

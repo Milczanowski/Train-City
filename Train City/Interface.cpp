@@ -2,25 +2,20 @@
 #include "Interface.h"
 #include "Button.h"
 
-Interface::Interface(const GameObject & gameObject) :GameObject(gameObject), index(0), interfaceState(waiting), train(NULL), mapElement(NULL),map(NULL)
+Interface::Interface(const GameObject & gameObject, Map * const map) :GameObject(gameObject), index(0), interfaceState(waiting), train(NULL), mapElement(NULL),map(map)
 {
+	showTrains();
 }
 
 Interface::~Interface()
 {
 }
 
-void Interface::setMapPionter(Map * const map)
-{
-	this->map = map;
-	showTrains();
-}
-
-void Interface::draw()
+void Interface::draw()const
 {
 	GameObject::draw();
 
-	for (ButtonList::iterator iter = buttonList.begin(); iter != buttonList.end(); iter++)
+	for (ButtonList::const_iterator iter = buttonList.begin(); iter != buttonList.end(); iter++)
 		iter->draw();
 }
 

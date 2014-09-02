@@ -45,7 +45,7 @@ public:
 
 	const std::string getName()const;
 	void update();
-	void draw();
+	void draw()const;
 
 	void Select();
 	void UnSelect();
@@ -76,7 +76,7 @@ public:
 	virtual ~City();
 	const Products::iterator getProduct(const std::string);
 	void onMouseOver();
-	void draw();
+	void draw()const;
 	void update();
 };
 

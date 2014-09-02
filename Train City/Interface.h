@@ -58,7 +58,7 @@ public:
 	Button(const GameObject&, const std::string, TrainMethod, Train *const, const unsigned int);
 
 	virtual ~Button();
-	void draw();
+	void draw()const;
 	void onMouseClickLeft();
 	const bool wasPressed();
 };
@@ -112,15 +112,13 @@ protected:
 	InterfaceState interfaceState;
 	ButtonList buttonList;
 public:
-	Interface(const GameObject &);
+	Interface(const GameObject &, Map * const);
 
 	virtual ~Interface();
 	void setTarget(MapElement *const);
 	void setTarget(const std::string);
 	void update();
-	void draw();
-	void setMapPionter(Map * const);
-	void addButton(SDL_Texture *,  const std::string,  Function);
+	void draw()const;
 	const MapElement * const getTarget()const;
 };
 
@@ -130,10 +128,6 @@ inline const MapElement * const Interface::getTarget()const
 	return mapElement;
 }
 
-inline void Interface::addButton(SDL_Texture * texture  ,const std::string message, Function function)
-{
-	buttonList.push_back(Button(GameObject(position+ Vector2(10.0f,10.0f+ 110*buttonList.size()),Vector2(180.0f,100.0f),0,texture),message,function));
-}
 
 
 

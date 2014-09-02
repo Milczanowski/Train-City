@@ -23,6 +23,7 @@ static const std::string texturesPath = "images/";
 static const std::string fontName = "arial.ttf";
 static const std::string iconFile = "icon.png";
 static const std::string markTextureName = "markTexture.png";
+static const std::string saveGameFile = "saveGame.txt";
 
 const Vector2 cityInfoSize(300, 150);
 const Vector2 basicInfoSize(100, 20);

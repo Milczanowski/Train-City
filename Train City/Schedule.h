@@ -12,7 +12,6 @@ private:
 	PassengerTrain *train;
 	MapElement *target, *target2;
 	bool direction;
-
 public:
 	Set(PassengerTrain * const train, MapElement * const target, MapElement * const target2):train(train), target(target), target2(target2), direction(true){}
 	void go();

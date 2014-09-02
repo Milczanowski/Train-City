@@ -11,7 +11,7 @@ CityInfo::~CityInfo()
 {
 }
 
-void CityInfo::draw()
+void CityInfo::draw()const
 {
 	GameObject::draw();
 	GraphicDevice::drawText(name, GraphicDevice::getColor(0, 0, 0, 0), position	+ Vector2(5,5), 20);

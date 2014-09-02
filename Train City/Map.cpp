@@ -42,7 +42,7 @@ Schedule * const Map::getSchedule()const
 	return schedule;
 }
 
-void Map::draw()
+void Map::draw()const
 {
 	GameObject::draw();
 
@@ -50,9 +50,9 @@ void Map::draw()
 	{
 		iter->draw();
 	}
-	Player::getInstance().updateTrains();
+	Player::getInstance().drawTrains();
 
-	for (MapElements::iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
+	for (MapElements::const_iterator iter = mapElements.begin(); iter != mapElements.end(); iter++)
 	{
 		(*iter)->draw();
 	}
@@ -73,6 +73,31 @@ void Map::update()
 void Map::onMouseClickLeft()
 {
 
+}
+
+std::ostream & operator<< (std::ostream & v, const Map & map)
+{
+	v<<map.railroadTrackList.size()<<std::endl;
+	for(RailroadTracksList::const_iterator iter = map.railroadTrackList.begin(); iter != map.railroadTrackList.end(); iter++)
+	{
+		v<<(*iter);
+	}
+	return v;
+	
+}
+std::istream & operator>> (std::istream & v, Map & map)
+{
+	unsigned int i;
+	v>>i;
+
+	for(;i>0;--i)
+	{
+		Vector2 start, end;
+		v>>start>>end;
+		map.addRailroadTracks(RailroadTracks(start,end));
+	}
+
+	return v;
 }
 
 void Map::onMouseClickRight()

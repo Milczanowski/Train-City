@@ -1,26 +1,14 @@
 Texture not found: 
 : file not found(MapElement)
-Texture not found: 
+: file not found(MapElement)
 : file not found(MapElement)
 Texture not found: 
 : file not found(MapElement)
-Texture not found: 
+: file not found(MapElement)
 : file not found(MapElement)
 Texture not found: 
 : file not found(MapElement)
-Texture not found: 
 : file not found(MapElement)
-Texture not found: 
-: file not found(MapElement)
-Texture not found: 
-: file not found(MapElement)
-Texture not found: 
-: file not found(MapElement)
-Texture not found: 
-: file not found(MapElement)
-Texture not found: 
-: file not found(MapElement)
-Texture not found: 
 : file not found(MapElement)
 Texture not found: 
 : file not found(MapElement)

@@ -16,7 +16,7 @@ public:
 	BasicInfo(const GameObject &, const std::string);
 	virtual ~BasicInfo();
 
-	void draw();
+	void draw()const;
 	void onMouseNotOver();
 	void onMouseClickLeft();
 };
@@ -28,7 +28,7 @@ private:
 	Products * products;
 public:
 	CityInfo(const BasicInfo &, Products *);
-	~CityInfo();
+	virtual ~CityInfo();
 
-	void draw();
+	void draw()const;
 };

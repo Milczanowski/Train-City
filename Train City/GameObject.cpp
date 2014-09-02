@@ -18,7 +18,7 @@ GameObject::~GameObject(void)
 }
 
 //Functions
-void GameObject::draw()
+void GameObject::draw()const
 {
 	GraphicDevice::drawTexture(texture, position, size,angle); 
 }

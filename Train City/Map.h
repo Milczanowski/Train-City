@@ -23,15 +23,17 @@ public:
 	Map(const GameObject &, std::string );
 	virtual ~Map();
 
-	void draw();
+	void draw()const;
 	void update();
 	void onMouseClickLeft();
 	void onMouseClickRight();
 	void addRailroadTracks(const RailroadTracks &);
 	MapElement * findCity(const std::string)const;
 	Schedule * const getSchedule()const;
-};
 
+	friend std::ostream & operator<< (std::ostream &, const Map &);
+	friend std::istream & operator>> (std::istream &, Map &);
+};
 
 
 inline void Map::addRailroadTracks(const RailroadTracks& railroadTrack)

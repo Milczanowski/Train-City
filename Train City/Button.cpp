@@ -41,7 +41,7 @@ Button::Button():GameObject(Vector2(0,0),Vector2(0,0),0,NULL),index(-1),click(fa
 {
 }
 
-void Button::draw()
+void Button::draw()const
 {
 	GameObject::draw();
 	GraphicDevice::drawText(message, GraphicDevice::getColor(0, 0, 0, 255), position,40);

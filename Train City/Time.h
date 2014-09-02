@@ -18,7 +18,13 @@ public:
 	void update();
 	void draw(const SDL_Color, const Vector2 &, const float )const;
 	static const float getDetlaTime();
+
+	friend std::ostream & operator<< (std::ostream &, const Time &);
+	friend std::istream & operator>> (std::istream &, Time &);
 };
+
+
+
 
 inline void Time::draw(const SDL_Color color, const Vector2 & position, const float size)const
 {
