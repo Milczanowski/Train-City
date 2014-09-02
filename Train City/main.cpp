@@ -57,10 +57,10 @@ void save()
 	{
 		std::ofstream saveFile(resourcesPath+saveGameFile);
 		if(saveFile.is_open())
-		{
-		
+		{	
 			saveFile<<*(container.time);
 			saveFile<<*(container.map);
+			saveFile<<Player::getInstance();
 
 
 			saveFile.close();

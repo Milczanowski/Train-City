@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
-
+#include "GameOver.h"
 
 Player::Player(void):cash(1000)
 {
@@ -75,6 +75,9 @@ void Player::free()
 
 void Player::updateTrains()
 {
+	if(cash<1000)
+		throw GameOver();
+
 	for(TrainList::iterator iter = trainList.begin();iter!=trainList.end();iter++)
 	{
 		if(typeid(*(*iter))==typeid(PassengerTrain))
@@ -86,13 +89,26 @@ void Player::updateTrains()
 
 std::ostream & operator<< (std::ostream &w, const Player &p)
 {
-	return w;//<<p.shipHealth<<" "<<p.playerEnergy<<" "<<p.scor<<" ";
+	w<<p.cash<<" "<<p.trainList.size()<<std::endl;
+	for(TrainList::const_iterator iter = p.trainList.begin();iter!=p.trainList.end();iter++)
+	{
+		w<<(*(*iter))<<std::endl;
+	}
+	return w;
 }
 
 std::istream & operator>> (std::istream &w, Player &p)
 {
-	//w>>p.shipHealth>>p.playerEnergy>>p.scor;
-	return w;
+	int size;
+	w>>p.cash>>size;
+	
+
+	for(;size>0;--size)
+	{
+		std::string napis;
+		std::getline(w,napis);
+	}
+
 }
 
 Player * Player::instance = new Player();

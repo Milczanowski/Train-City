@@ -1,6 +1,19 @@
-0 0 12 981
+0 0 24 520
 4
-270 70  460 290 
-270 70  270 470 
-270 70  820 220 
-920 420  640 710 
+460 290  270 70 
+460 290  270 470 
+460 290  820 220 
+460 290  920 420 
+-2264 4
+class FreightTrain<&char * TemplateVariables::oil,&char * TemplateVariables::tankerTrain> 0.03 100 0 6098
+ 0 0 0  270 70  0
+
+class FreightTrain<&char * TemplateVariables::car,&char * TemplateVariables::carTrain> 0.025 100 0 6549
+ 0 0 0  270 70  0
+
+class FreightTrain<&char * TemplateVariables::coal,&char * TemplateVariables::coalTrain> 0.01 100 0 7067
+ 0 0 0  270 70  0
+
+class PassengerTrain 0.05 80 0 7969
+ 0 0 0  270 70  0
+

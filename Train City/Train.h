@@ -11,10 +11,9 @@ typedef std::list<Product> Products;
 
 
 class Train
-{
-private:
-	Vector2 positon, direction;
+{	
 protected:
+	Vector2 positon, direction;
 	unsigned int capacity, currentBurden;
 	MapElement * target;
 	Delay delay;
@@ -31,7 +30,22 @@ public:
 	Train(const float,const unsigned int,MapElement * const);
 	void draw();
 	~Train(void);
+
+	friend std::ostream & operator<< (std::ostream &, const Train &);
+	friend std::istream & operator>> (std::istream &, Train &);
 };
+
+inline std::ostream & operator<< (std::ostream &v , const Train & pT)
+{
+	return v<<typeid(pT).name()<<std::endl<<pT.averageSpeed<<" "<<pT.capacity<<" "<<pT.delay<<" "<<pT.currentBurden<<" "<<
+		pT.direction<<" "<<pT.positon<<" "<<pT.distance<<std::endl;
+}
+
+inline std::istream & operator>> (std::istream & v, Train & pT)
+{
+	return  v>>pT.averageSpeed>>pT.capacity>>pT.delay>>pT.currentBurden>>
+		pT.direction>>pT.positon>>pT.distance;
+}
 
 class PassengerTrain :public Train
 {
@@ -42,7 +56,22 @@ public:
 	void unload(const unsigned int );
 	void update();
 	virtual const std::string getType()const;
+
+	friend std::ostream & operator<< (std::ostream &, const PassengerTrain &);
+	friend std::istream & operator>> (std::istream &, PassengerTrain &);
 };
+
+inline std::ostream & operator<< (std::ostream &v , const PassengerTrain & pT)
+{
+	v<<typeid(pT).name()<<" "<<pT.averageSpeed<<" "<<pT.capacity<<" "<<pT.delay<<" "<<pT.currentBurden<<" "<<
+		pT.direction<<" "<<pT.positon<<" "<<pT.distance<<std::endl;
+}
+
+inline std::istream & operator>> (std::istream & v, PassengerTrain & pT)
+{
+	return  v>>pT.averageSpeed>>pT.capacity>>pT.delay>>pT.currentBurden>>
+		pT.direction>>pT.positon>>pT.distance;
+}
 
 inline const std::string PassengerTrain::getType()const
 {
@@ -60,7 +89,26 @@ public:
 	
 	void unload(const unsigned int );
 	virtual const std::string getType()const ;
+
+	template <char const  * productName, char const *  trainName> 
+	friend std::ostream & operator<< (std::ostream &, const FreightTrain<productName,trainName> &);
+	template <char const  * productName, char const *  trainName> 
+	friend std::istream & operator>> (std::istream &, FreightTrain<productName,trainName> &);
 };
+
+template <char const  * productName, char const *  trainName> 
+std::ostream & operator<< (std::ostream & v, const FreightTrain<productName,trainName>  & fT)
+{
+	v<<typeid(pT).name()<<" "<<productName<<" "<<trainName<<" "<<pT.averageSpeed<<" "<<pT.capacity<<" "<<pT.delay<<" "<<pT.currentBurden<<" "<<
+		pT.direction<<" "<<pT.positon<<" "<<pT.distance<<std::endl;
+}
+
+template <char const  * productName, char const *  trainName> 
+std::istream & operator>> (std::istream &, FreightTrain<productName,trainName> &)
+{
+	return  v>>pT.averageSpeed>>pT.capacity>>pT.delay>>pT.currentBurden>>
+		pT.direction>>pT.positon>>pT.distance;
+}
 
 template <char const  * productName, char const *  trainName> 
 FreightTrain<productName, trainName>::FreightTrain(const float averageSpeed,const unsigned int capacity, MapElement * const target):Train(averageSpeed, capacity,target)

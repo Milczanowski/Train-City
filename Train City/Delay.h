@@ -1,6 +1,7 @@
 #pragma once
 #include <ctime>
 #include "SDL.h"
+#include <iostream>
 
 class Delay
 {
@@ -12,7 +13,13 @@ public:
 	~Delay();
 	void Restart();
 	const bool isRedy()const;
+
+	friend std::ostream & operator<< (std::ostream &, const Delay &);
+	friend std::istream & operator>> (std::istream &, Delay &);
 };
+
+
+
 
 inline void Delay::Restart()
 {

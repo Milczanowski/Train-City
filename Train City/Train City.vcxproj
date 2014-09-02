@@ -92,6 +92,7 @@
     <ClInclude Include="FunctionsAndDefinitions.h" />
     <ClInclude Include="GameError.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="GraphicDevice.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Map.h" />
@@ -119,6 +120,7 @@
     <ClCompile Include="FunctionsAndDefinitions.cpp" />
     <ClCompile Include="GameError.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GraphicDevice.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
