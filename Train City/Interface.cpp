@@ -126,8 +126,8 @@ void Interface::cityOptions()
 	buttonList.clear();
 	if (mapElement != NULL)
 	{
-		buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "Connect", &Interface::connectMapElement, this));
-		buttonList.push_back(Button(GameObject(position + Vector2(10, 115), Vector2(180,100),0, Textures::getTexture("errorImage")), "Buy Train", &Interface::buyTrain, this));
+		buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("button.bmp")), "Connect", &Interface::connectMapElement, this));
+		buttonList.push_back(Button(GameObject(position + Vector2(10, 115), Vector2(180,100),0, Textures::getTexture("button.bmp")), "Buy Train", &Interface::buyTrain, this));
 	}
 	else
 	{
@@ -185,10 +185,10 @@ void Interface::buyTrain()
 			{
 				interfaceState = waiting;
 				buttonList.clear();
-				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(180,100),0,Textures::getTexture("errorImage")),"Passanger", &Interface::addPassengerTrain,this)); 
-				buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),TemplateVariables::tankerTrain, &Interface::addTankerTrain,this)); 
-				buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("errorImage")),TemplateVariables::carTrain, &Interface::addCarTrain,this)); 
-				buttonList.push_back(Button(GameObject(position+Vector2(10,340),Vector2(180,100),0,Textures::getTexture("errorImage")),TemplateVariables::coalTrain, &Interface::addCoalTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Passanger", &Interface::addPassengerTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("button.bmp")),TemplateVariables::tankerTrain, &Interface::addTankerTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("button.bmp")),TemplateVariables::carTrain, &Interface::addCarTrain,this)); 
+				buttonList.push_back(Button(GameObject(position+Vector2(10,340),Vector2(180,100),0,Textures::getTexture("button.bmp")),TemplateVariables::coalTrain, &Interface::addCoalTrain,this)); 
 			}break;
 		default:
 			{
@@ -202,20 +202,20 @@ void Interface::buyTrain()
 void Interface::showTrains()
 {
 	buttonList.clear();
-	buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "UP", &Interface::up, this));
+	buttonList.push_back(Button(GameObject(position + Vector2(10, 10), Vector2(180, 100), 0, Textures::getTexture("button.bmp")), "UP", &Interface::up, this));
 	int i=0, name =0;
 	for(TrainList::iterator iter = Player::getInstance().beginTrainList(); iter != Player::getInstance().endTrainList(); iter++)
 	{
 		if(i>=(int)index && (*iter)->isReady())
 		{
-			buttonList.push_back(Button(GameObject(position + Vector2(10,110+ 105.0f*(name)), Vector2(180, 100), 0, Textures::getTexture("errorImage")), ToString<int>(i)+(*iter)->getType() , &Interface::selectTrain, this, (*iter)->get()));	
+			buttonList.push_back(Button(GameObject(position + Vector2(10,110+ 105.0f*(name)), Vector2(180, 100), 0, Textures::getTexture("button.bmp")), ToString<int>(i)+(*iter)->getType() , &Interface::selectTrain, this, (*iter)->get()));	
 			name++;
 			if(i >= (int)index+ 4)
 				break;
 		}
 		i++;
 	}
-	buttonList.push_back(Button(GameObject(position + Vector2(10, 640), Vector2(180, 100), 0, Textures::getTexture("errorImage")), "DOWN", &Interface::down, this));
+	buttonList.push_back(Button(GameObject(position + Vector2(10, 640), Vector2(180, 100), 0, Textures::getTexture("button.bmp")), "DOWN", &Interface::down, this));
 }
 
 void Interface::up()
@@ -245,15 +245,15 @@ void Interface::selectTrain(Train * const train)
 				buttonList.clear();
 				this->mapElement = train->getTarget();
 				interfaceState = waiting;
-				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(180,100),0,Textures::getTexture("errorImage")),"Go To",&Interface::trainGoTo,this));
+				buttonList.push_back(Button(GameObject(position+Vector2(10,10),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Go To",&Interface::trainGoTo,this));
 				if(typeid(*train)!=typeid(PassengerTrain))
 				{
-					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),"Buy", &Train::load,train, 5)); 
-					buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("errorImage")),"Sell", &Train::unload,train, 5)); 
+					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Buy", &Train::load,train, 5)); 
+					buttonList.push_back(Button(GameObject(position+Vector2(10,230),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Sell", &Train::unload,train, 5)); 
 				}
 				else
 				{
-					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("errorImage")),"Plying", &Interface::trainSetPlying, this)); 
+					buttonList.push_back(Button(GameObject(position+Vector2(10,120),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Plying", &Interface::trainSetPlying, this)); 
 				}
 			}break;
 		default:

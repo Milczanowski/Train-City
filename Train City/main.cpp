@@ -4,12 +4,13 @@
 #include <stdio.h>
 #include "Time.h"
 #include "Interface.h"
+#include "GameOver.h"
 
 enum MenuState
 {
 	menu,
 	play,
-	gameStart,
+	gameOver,
 	gameExit
 };
 
@@ -91,10 +92,10 @@ int main(int argc, char* argv[])
 
 		ButtonList buttonList;
 		
-		buttonList.push_back(Button( GameObject(Vector2(410,100),Vector2(180,100),0,Textures::getTexture("errorImage")),"Start", &start));
-		buttonList.push_back(Button( GameObject(Vector2(410,210),Vector2(180,100),0,Textures::getTexture("errorImage")),"Save", &save));
-		buttonList.push_back(Button( GameObject(Vector2(410,320),Vector2(180,100),0,Textures::getTexture("errorImage")),"Load", &load));
-		buttonList.push_back(Button( GameObject(Vector2(410,430),Vector2(180,100),0,Textures::getTexture("errorImage")),"Exit", &exit));
+		buttonList.push_back(Button( GameObject(Vector2(410,100),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Start", &start));
+		buttonList.push_back(Button( GameObject(Vector2(410,210),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Save", &save));
+		buttonList.push_back(Button( GameObject(Vector2(410,320),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Load", &load));
+		buttonList.push_back(Button( GameObject(Vector2(410,430),Vector2(180,100),0,Textures::getTexture("button.bmp")),"Exit", &exit));
 
 		while(container.menuState!=gameExit && _event.type !=SDL_QUIT)
 		{
@@ -120,8 +121,14 @@ int main(int argc, char* argv[])
 						container.map->update();
 						container._interface->update();
 						container.time->update();
-						Player::getInstance().updateTrains();
-
+						try
+						{
+							Player::getInstance().updateTrains();
+						}
+						catch(GameOver &gameOver)
+						{
+							container.menuState = MenuState::gameOver;
+						}
 						GraphicDevice::begin();
 						{
 							container.map->draw();
@@ -134,6 +141,11 @@ int main(int argc, char* argv[])
 						if(_event.key.keysym.sym == SDLK_ESCAPE)
 							container.menuState = menu;
 				  }break;
+			case gameOver:
+				{
+					if(_event.type == SDL_KEYDOWN)
+						container.menuState = menu;
+				};
 			}
 			SDL_PollEvent(&_event);
 		}

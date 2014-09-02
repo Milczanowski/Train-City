@@ -108,7 +108,7 @@ std::istream & operator>> (std::istream &w, Player &p)
 		std::string napis;
 		std::getline(w,napis);
 	}
-
+	return w;
 }
 
 Player * Player::instance = new Player();
